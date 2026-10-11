@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db   = 'finservkart';
 $user = 'root';
-$pass = '';
+$pass = 'Taxfile@2024';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

@@ -1,14 +1,12 @@
 <?php
-include_once('config.php'); // Include the correct connection file
-
-$query = mysqli_query($con, "SELECT * FROM admin");
-
-while ($result = mysqli_fetch_array($query)) {
+include_once('config.php');
+$query=mysqli_query($con,"select * from admin");
+while($result=mysqli_fetch_array($query)){
     $fb = $result['fb'];
     $insta = $result['insta'];
     $whatsapp = $result['whatsapp'];
-    $linkedin = $result['linkedin']; // Fixed incorrect assignment
-    $twitter = $result['twitter']; // Fixed incorrect assignment
+    $linkedin = $result['twitter'];
+    $twitter = $result['linkedin'];
     $phone = $result['phone'];
     $email = $result['email'];
     $company = $result['company'];

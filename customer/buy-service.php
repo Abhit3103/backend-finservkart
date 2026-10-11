@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+session_start();
    include_once('../include/config.php');
    if (strlen($_SESSION['id']==0)) {
    header('location:logout.php');
@@ -6,7 +7,7 @@
    ?>
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+<head>
       <meta charset="utf-8">
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
       <title>Services</title>
@@ -135,7 +136,9 @@
                      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close alert'></button>
                      </div>
                      <?php } ?>
-                     <form action="../SabPaisaPostPgRequest.php" method="post" enctype="multipart/form-data">
+                     
+                   <form id="myForm" method="post" enctype="multipart/form-data">
+
     <input type="hidden" name="pID" value="<?php echo $formattedString; ?>">
     <input type="hidden" name="CustID" value="<?php echo $CustID; ?>">
     <input type="hidden" name="name" value="<?php echo $fname . ' ' . $lname; ?>">
@@ -168,43 +171,69 @@
             <!-- End Card with an image on left -->
          </section>
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-         <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
-         <!-- <script>
-            $("#myForm").on("submit", function(e){
-                e.preventDefault();  // prevent the form from submitting normally
-                
-                var formData = new FormData(this);  // create new FormData object test key rzp_test_tizRIUos6Gdp88
-            
-                var options = {
-                    "key": "rzp_live_wHDSacVlpdLgtE",  //live 
-                    "amount": formData.get('amt')*100, 
-                    "currency": "INR",
-                    "name": "Finservkart",
-                    "description": "Service Bill Pay",
-                    "image": "logo.png",
-                    "prefill": {
-                        "contact": "<?php echo $phone; ?>" 
-                    },
-                    "handler": function (response){
-                        formData.append("payment_id", response.razorpay_payment_id);
-                        $.ajax({
-                            url: "./api/payment_process.php",  // PHP file to send the request to
-                            type: "POST",  // type of request to be sent
-                            data: formData,  // data to be sent to the server
-                            contentType: false,  // do not set any content type header
-                            processData: false,  // do not process data
-                            success:function(result){
-                                var pid = formData.get('pID');
-                                window.location.href="invoice.php?pid=" + pid;
-                            }
-                        });
-                    }
-                };
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
+       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const form = this;
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    const formData = new FormData(form);
+    const amount = parseFloat(formData.get("amount")) * 100;  // Convert to paise
+    const contact = formData.get("contact");
+    const name = formData.get("name");
+
+    const options = {
+        key: "rzp_live_wHDSacVlpdLgtE",  // Replace with your Razorpay live key
+        amount: amount,
+        currency: "INR",
+        name: "Finservkart",
+        description: "Service Bill Pay",
+        image: "https://finservkart.com/logo.png", // optional
+        prefill: {
+            name: name,
+            contact: contact
+        },
+        handler: function (response) {
+            // Add payment_id to formData
+            formData.append("payment_id", response.razorpay_payment_id);
+
+            // Submit data to server via AJAX
+            $.ajax({
+                url: "./api/payment_process.php",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    const pid = formData.get('pID');
+                    window.location.href = "invoice.php?pid=" + pid;
+                },
+                error: function(){
+                    Swal.fire("Server Error", "Payment succeeded but data submission failed.", "error");
+                }
             });
-         </script> -->
-      </main>
+        },
+        theme: {
+            color: "#3399cc"
+        }
+    };
+
+    const rzp1 = new Razorpay(options);
+    rzp1.on("payment.failed", function (response){
+        Swal.fire("Payment Failed", response.error.description, "error");
+    });
+    rzp1.open();
+});
+</script>
+
+</main>
       <?php } ?>
       <!-- End #main -->
       <!-- ======= Footer ======= -->
@@ -242,4 +271,4 @@
       </script>
    </body>
 </html>
-<?php } ?>   
+<?php } ?>

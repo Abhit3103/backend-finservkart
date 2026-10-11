@@ -2,7 +2,7 @@
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Taxfile@2024";
 $dbname = "finservkart";
 
 // Create connection

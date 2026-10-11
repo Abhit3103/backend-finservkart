@@ -4,10 +4,9 @@ date_default_timezone_set('Asia/Kolkata');
 $regDate = date('Y-m-d H:i:s');
 include('../smtp/PHPMailerAutoload.php');
 $host = 'localhost';
-$dbname = 'finservcart';
+$dbname = 'finservkart';
 $username = 'root';
-$password = '';
-
+$password = 'WindRed@12345';
 // Create a new MySQLi connection
 $conn = new mysqli($host, $username, $password, $dbname);
 
@@ -94,7 +93,6 @@ $msg = <<<HTML
                                         <strong>Here are your login details:</strong><br/>
                                         <b>&#128231; Email ID : $toemail</b><br/>
                                         <b>&#128273; Password : $password</b><br/>
-                                        <a href="https://finservkart.com/apps/FinservKartV2.apk"><button style="background-color:#1204aa;border:none;color:#fff;padding:15px 15px;text-align:center;text-decoration:none;display:inline-block;font-size:16px;margin:2px 2px;cursor:pointer">Download Apps</button></a><br/>
                                         With these credentials, you can access your Finservkart account anytime, anywhere, and start managing your finances with ease.<br/>
                                         If you have any questions or need assistance at any point, our dedicated customer support team is here to help. Simply reach out to us via email at <a href="mailto:support@finservkart.com">support@finservkart.com</a>, and we'll be happy to assist you.<br/>
                                         Thank you for choosing Finservkart. We look forward to serving you and helping you achieve your financial goals.
@@ -130,20 +128,19 @@ $msg = <<<HTML
 HTML;
 
 // Prepare the SQL statement for insertion
-$sql = sprintf("INSERT INTO customer (CustID, fname, lname, email, phone, password, referral, pincode, regDate, CProfile, agent_id) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+$sql = sprintf("INSERT INTO customer (CustID, fname, lname, email, phone, address, password, referral, regDate, CProfile ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' , '%s')",
     $conn->real_escape_string($_POST['CID']),
     $conn->real_escape_string($_POST['fname']),
     $conn->real_escape_string($_POST['lname']),
     $conn->real_escape_string($_POST['email']),
     $conn->real_escape_string($_POST['phone']),
+    $conn->real_escape_string($_POST['address']),
     $conn->real_escape_string($_POST['password']),
     $conn->real_escape_string($_POST['referral']),
-    $conn->real_escape_string($_POST['pincode']),   // <-- pincode added here
     $conn->real_escape_string($regDate),
-    $conn->real_escape_string($_POST['CProfile']),
-    $conn->real_escape_string($_POST['agent_id'])   // <-- agent_id added here
-);
+    $conn->real_escape_string($_POST['CProfile'])
 
+);
 
 // Initialize the response array
     $response = array();

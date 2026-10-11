@@ -104,7 +104,7 @@
          <section class="section">
             <!-- Card with an image on left -->
             <div class="card mb-3">
-               <div class="row g-0">
+<div class="row g-0">
                   <div class="col-md-4">
                      <img src="../admin/assets/services/<?php echo $result['service_image']; ?>" class="img-fluid rounded-start" alt="...">
                   </div>
@@ -130,13 +130,14 @@
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close alert'></button>
                         </div>
                         <?php } ?>
-                        <form class="row g-3" id="myForm" enctype="multipart/form-data">
+<form id="myForm" action="" method="post" enctype="multipart/form-data">
+
                            <div class="col-12">
                                 <label for="email">Select Your Customer</label>
                                 <select class="form-control" name="agent" aria-label="Default select example" style="border-color: purple" id="customerSelect" required>
                                     <option hidden="" disabled="disabled" selected="selected" value="">--- Select Your Customer ---</option>
                                     <?php
-                                    $sql = "SELECT * FROM `customer` WHERE referral = '$referral'";
+                                    $sql = "SELECT * FROM customer WHERE referral = '$referral'";
                                     $resultAgents = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($resultAgents) > 0) {
                                         while ($rowAgent = mysqli_fetch_assoc($resultAgents)) {
@@ -153,10 +154,12 @@
                             <input type="hidden" class="form-control" name="name" id="name" value="" readonly>
                             <input type="hidden" class="form-control" name="email" id="email" value="" readonly>
                             <input type="hidden" class="form-control" name="contact" id="contact" value="" readonly>
-                            <input type="hidden" class="form-control" name="referral" value="<?php echo $referral; ?>" id="inputEmail4">
-                            <input type="hidden" class="form-control" name="serviceid" value="<?php echo $result['id']; ?>" id="inputEmail4">
-                            <input type="hidden" class="form-control" name="service" value="<?php echo $result['service_name']; ?>" id="inputEmail4">
-                            <input type="hidden" class="form-control" id="amt" name="amt" value="<?php echo $result['total_amt']; ?>" id="inputEmail4">
+                            <input type="hidden" id="referral" name="referral" value="<?php echo $referral; ?>">
+                            <input type="hidden" id="serviceid" name="serviceid" value="<?php echo $result['id']; ?>">
+                            <input type="hidden" id="service" name="service" value="<?php echo $result['service_name']; ?>">
+                            <input type="hidden" name="amount" id="amount" value="<?php echo $result['total_amt']; ?>">
+
+
                            <div class="col-12">
                               <label for="inputPassword4" class="form-label">Upload Documents</label>
                               <input type="file" name="file[]" accept=".xlsx, .xls, .csv, .pdf, .png, .jpg, .jpeg, .doc, .docx, .txt, .pptx, .zip, .rar" multiple required>
@@ -175,45 +178,71 @@
             </div>
             <!-- End Card with an image on left -->
          </section>
-         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-         <script>
-            $("#myForm").on("submit", function(e){
-                e.preventDefault();  // prevent the form from submitting normally
-                
-                var formData = new FormData(this);  // create new FormData object test key rzp_test_tizRIUos6Gdp88
-                
-                var contactValue = $('#contact').val();
-            
-                var options = {
-                    "key": "rzp_live_wHDSacVlpdLgtE",  //live rzp_live_wHDSacVlpdLgtE
-                    "amount": formData.get('amt')*100, 
-                    "currency": "INR",
-                    "name": "Finservkart",
-                    "description": "Service Bill Pay",
-                    "image": "logo.png",
-                    "prefill": {
-                        "contact": contactValue
-                    },
-                    "handler": function (response){
-                        formData.append("payment_id", response.razorpay_payment_id);
-                        $.ajax({
-                            url: "./api/payment_process.php",
-                            type: "POST", 
-                            data: formData, 
-                            contentType: false,  
-                            processData: false, 
-                            success:function(result){
-                                var pid = formData.get('pID');
-                                window.location.href="billing.php?pid=" + pid;
-                            }
-                        });
-                    }
-                };
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
+       <!-- Razorpay Checkout Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+$("#myForm").on("submit", function(e){
+    e.preventDefault();
+
+    var form = this;
+
+    // HTML5 validation check
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    var formData = new FormData(form);
+   var amount = parseFloat(formData.get('amount')) * 100;
+
+
+    var contact = formData.get('contact');
+
+    var options = {
+        key: "rzp_live_ICzjw9iEib4V6g", 
+        amount: amount,
+        currency: "INR",
+        name: "Finservkart",
+        description: "Service Bill Pay",
+        image: "logo.png",
+        prefill: {
+            contact: contact
+        },
+        handler: function (response){
+            // Razorpay payment successful, append payment_id to formData
+            var newFormData = new FormData(form);
+            newFormData.append("payment_id", response.razorpay_payment_id);
+
+            $.ajax({
+                url: "./api/payment_process.php",  // Backend PHP file
+                type: "POST",
+                data: newFormData,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    // Get PID from the original form or from result
+                    var pid = newFormData.get('pID'); // Make sure pID exists in form
+                    window.location.href = "billing.php?pid=" + pid;
+                },
+                error: function(){
+                    Swal.fire("Server Error", "Payment succeeded but data submission failed.", "error");
+                }
             });
-         </script>
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response) {
+        Swal.fire("Payment Failed", response.error.description, "error");
+    });
+
+    rzp1.open();
+});
+</script>
+
       </main>
       <?php } ?>
       <!-- End #main -->

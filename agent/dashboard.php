@@ -8,6 +8,15 @@
    while($result=mysqli_fetch_array($query))
    {
        $referral = $result['referral'];
+       
+           // NAYA CODE: franchisecode nikalo aur franchise ka data lao
+       $franchisecode = $result['franchisecode'];
+       $franchiseInfo = '';
+
+       $franchiseQuery = mysqli_query($con, "SELECT id, fname, lname FROM franchise WHERE referral_code='$franchisecode'");
+       if ($fran = mysqli_fetch_array($franchiseQuery)) {
+           $franchiseInfo = 'FranID: ' . htmlspecialchars($fran['id']) . ' | Name: ' . htmlspecialchars($fran['fname'] . ' ' . $fran['lname']);
+       }
    ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,15 +101,22 @@
         });
       </script>
       <main id="main" class="main">
-         <div class="pagetitle">
-            <h1>Dashboard</h1>
-            <nav>
-               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard</li>
-               </ol>
-            </nav>
-         </div>
+         <div class="pagetitle d-flex justify-content-between align-items-center">
+   <div>
+      <h1>Dashboard</h1>
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+         </ol>
+      </nav>
+   </div>
+   <div>
+      <span style="font-weight:bold; font-size:14px;">
+         <?php echo $franchiseInfo; ?>
+      </span>
+   </div>
+</div>
          <?php
         $query2 = "SELECT IFSE, bank, branch, ACNo FROM agent WHERE id='$userid'";
         $result2 = mysqli_query($con, $query2);

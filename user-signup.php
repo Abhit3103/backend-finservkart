@@ -1,80 +1,39 @@
 <?php
+
 include("capture.php");
 include 'db_connection.php';
-function generateRandomString($length) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
 
-$referralCode = generateRandomString(8);
 $ran = mt_rand(1000, 9999);
-$result = "CID-" . $ran;
-
-// Handle AJAX request to fetch agents based on pincode
-if (isset($_POST['pincode'])) {
-   $pincode = $_POST['pincode'];
-
-   // Query to fetch agents available for the given pincode
-   $stmt = $conn->prepare("SELECT id, fname, lname, phone FROM agent WHERE FIND_IN_SET(?, pincode) > 0");
-   $stmt->bind_param("s", $pincode);
-   $stmt->execute();
-   $result = $stmt->get_result();
-
-   $agents = [];
-   while ($row = $result->fetch_assoc()) {
-       $agents[] = $row;  // Store agent details in array
-   }
-
-   // Return agent data as JSON
-   echo json_encode($agents);
-   exit;
-}
+$customerID = "CID-" . $ran; // New customer ID
 
 // Handle form submission
-if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
-   // Form submission logic (customer registration) goes here...
-   // (This is the same as your existing form submission logic)
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $fname = trim($_POST['fname']);
+    $lname = trim($_POST['lname']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $address = trim($_POST['address']);
+    $pincode = trim($_POST['pincode']);
+    $referral = trim($_POST['referral']);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);  // Secure password hashing
 
-   $fname = $_POST['fname'];
-   $lname = $_POST['lname'];
-   $email = $_POST['email'];
-   $phone = $_POST['phone'];
-   $pincode = $_POST['pincode'];
-   $referral = $_POST['referral'];
-   $password = password_hash($_POST['password'], PASSWORD_BCRYPT);  // Secure password hashing
+    // Prepare and bind statement
+    $stmt = $conn->prepare("INSERT INTO customer (CustID, fname, lname, email, phone, address, pincode, referral, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssss", $customerID, $fname, $lname, $email, $phone, $address, $pincode, $referral, $password);
 
-   // Fetch available agents based on pincode
-   $stmt = $conn->prepare("SELECT id FROM agent WHERE FIND_IN_SET(?, pincode) > 0");
-   $stmt->bind_param("s", $pincode);
-   $stmt->execute();
-   $result = $stmt->get_result();
+    // Execute the query
+    if ($stmt->execute()) {
+        echo "Registration successful.";
+    } else {
+        echo "Registration failed: " . $stmt->error;
+    }
 
-   // If no agents available
-   if ($result->num_rows == 0) {
-       die("No agents available for this pincode.");
-   }
-
-   // Fetch all available agents
-   $agents = [];
-   while ($row = $result->fetch_assoc()) {
-       $agents[] = $row['id'];
-   }
-
-   // Randomly assign an agent
-   $random_agent_id = $agents[array_rand($agents)];
-
-   // Insert customer into the database
-   $stmt = $conn->prepare("INSERT INTO customer (fname, lname, email, phone, pincode, referral, password, agent_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-   $stmt->bind_param("sssssssi", $fname, $lname, $email, $phone, $pincode, $referral, $password, $random_agent_id);
-
- 
+    $stmt->close();
+    $conn->close();
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -102,15 +61,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
       <!-- Google Web Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
       <!-- Icon Font Stylesheet -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
       <!-- Libraries Stylesheet -->
       <link href="lib/animate/animate.min.css" rel="stylesheet">
       <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
       <!-- Customized Bootstrap Stylesheet -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Modern Premium CSS -->
+      <link href="css/modern-premium.css" rel="stylesheet">
       <!-- Template Stylesheet -->
       <link href="css/style.css" rel="stylesheet">
       <style>
@@ -144,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
          }
       </style>
    </head>
-   <body>
+   <body style="font-family: 'Poppins', sans-serif;">
       <!-- Spinner Start -->
       <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
@@ -153,13 +114,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
       <?php include("include/header.php"); ?>
       <!-- Page Header Start -->
       <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
-         <div class="container">
-            <h1 class="display-3 mb-4 animated slideInDown">Signup</h1>
+         <div class="container position-relative z-1">
+            <h1 class="display-3 mb-4 animated slideInDown">Create Account</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">User Signup</li>
+                  <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Customer Signup</li>
                </ol>
             </nav>
          </div>
@@ -175,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
                   <form id="myForm" method="POST" enctype="multipart/form-data">
     <input type="hidden" class="form-control" name="CID" id="CID">
     <input type="hidden" class="form-control" name="CProfile" id="CProfile" value="avatar.png">
-    <input type="hidden" name="agent_id" id="agent_id">
+ 
 
     <div class="row g-3">
         <!-- First Name -->
@@ -209,30 +169,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
                 <label for="phone">Contact No</label>
             </div>
         </div>
-
+         <!-- Address -->
+        <div class="col-md-6">
+             <div class="form-floating">
+               <textarea class="form-control" name="address" id="address" placeholder="Address" style="height: 100px" autocomplete="new-address" required></textarea>
+               <label for="address">Address</label>
+             </div>
+        </div>
         <!-- Pincode -->
         <div class="col-md-6">
             <div class="form-floating">
-                <input type="text" class="form-control" name="pincode" id="pincode" placeholder="Pincode" pattern="[0-9]{6}" title="6 numeric characters only" maxlength="6" autocomplete="new-pincode" required oninput="checkAgents()">
+                <input type="text" class="form-control" name="pincode" id="pincode" placeholder="Pincode" pattern="[0-9]{6}" title="6 numeric characters only" maxlength="6" autocomplete="new-pincode" >
                 <label for="pincode">Pincode</label>
             </div>
         </div>
 
-        <!-- Agent -->
-        <div class="col-md-6">
-            <div class="form-floating">
-            <input type="text" class="form-control" id="agent_info" placeholder="Assigned Agent" readonly>
-            <label for="agent_info">Assigned Agent</label>
-            </div>
-        </div>
+      
 
-        <!-- Referral Code -->
-        <div class="col-md-12">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="referral" name="referral" placeholder="Paste Referral Code" maxlength="8" title="Referral code must be 8 characters long" pattern=".{8,}">
-                <label for="referral">Paste Referral Code Here</label>
-            </div>
-        </div>
+       <!-- Referral Code -->
+<div class="col-md-12">
+    <div class="form-floating">
+        <input type="text" 
+               class="form-control" 
+               id="referral" 
+               name="referral" 
+               placeholder="Paste Referral Code" 
+               maxlength="6" 
+               title="Referral code must be exactly 6 digits"
+               
+               inputmode="numeric">
+        <label for="referral">Paste Referral Code Here</label>
+    </div>
+</div>
+
 
         <!-- Password -->
         <div class="col-12">
@@ -263,7 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
         </div>
 
         <!-- Login Link -->
-        <h5><b style="color:green;">Already have an account? </b><a href="user-login.php">Log In</a></h5>
+        <h5><b style="color:green;">Already have an account? </b><a href="customer.php">Log In</a></h5>
     </div>
 </form>
 
@@ -290,47 +259,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST['pincode'])) {
       <script src="lib/counterup/counterup.min.js"></script>
       <!-- Template Javascript -->
       <script src="js/main.js"></script>
-      <script>
-// JavaScript function to fetch agents based on pincode
-function checkAgents() {
-    const pincode = document.getElementById('pincode').value.trim();
-    const agentInfoInput = document.getElementById('agent_info');
-    const agentIdInput = document.getElementById('agent_id');
 
-    // Clear fields first
-    agentInfoInput.value = '';
-    agentIdInput.value = '';
-
-    if (pincode.length === 6 && /^\d{6}$/.test(pincode)) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "", true);  // Same page for fetching agent (No external PHP file)
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.onload = function() {
-            if (this.status === 200) {
-                try {
-                    const agents = JSON.parse(this.responseText);
-                    if (agents.length > 0) {
-                        // Randomly select one agent
-                        const randomIndex = Math.floor(Math.random() * agents.length);
-                        const agent = agents[randomIndex];
-
-                        // Set agent info
-                        agentInfoInput.value = `${agent.fname} ${agent.lname} (${agent.phone})`;
-
-                        // Set hidden agent id to submit in form
-                        agentIdInput.value = agent.id;
-                    } else {
-                        agentInfoInput.value = 'No agent available for this Pincode';
-                    }
-                } catch (e) {
-                    console.error('Invalid JSON response');
-                }
-            }
-        };
-        xhr.send("pincode=" + encodeURIComponent(pincode));
-    }
-}
-</script>
 
 
 
@@ -532,69 +461,83 @@ function checkAgents() {
          }
          });
       </script>
-      <script>
-        document.getElementById('myForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-    
-            var formData = new FormData(this); // Create a new FormData instance
-    
-            // Use AJAX to submit the form data
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'api.function/customer_reg_api.php', true);
-    
-            
-            Swal.fire({
-                title: 'Please Wait...',
-                allowOutsideClick: false,
-                showConfirmButton: false, 
-                onBeforeOpen: () => {
-                    Swal.showLoading();
-                },
-                onClose: () => {
-                    Swal.close();
-                }
-            });
+    <script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-    
-            xhr.onload = function() {
-                Swal.close(); // Close the initial SweetAlert
-    
-                if (this.status >= 200 && this.status < 400) {
-                    // Success!
-                    var response = JSON.parse(this.response);
-                    Swal.fire({
-                        title: response.message,
-                        icon: response.status === 'success'? 'success' : 'error',
-                        confirmButtonText: 'Login',
-                        allowOutsideClick: false,
-                        showCloseButton: true
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Redirect to the login page after the user clicks 'Ok'
-                            window.location.href = 'user-login.php';
-                        }
-                    });
-                } else {
-                    // We reached our target server, but it returned an error
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'There was an error with the request',
-                        icon: 'error'
-                    });
-                }
-            };
-    
-            xhr.onerror = function() {
-                // There was a connection error of some sort
-                Swal.fire({
-                    title: 'Error',
-                    text: 'There was an error with the request',
-                    icon: 'error'
-                });
-            };
-    
-            xhr.send(formData); // Send the form data
+        var formData = new FormData(this); // Create a new FormData instance
+
+        // Use AJAX to submit the form data
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'api.function/customer_reg_api.php', true);
+
+        // Show SweetAlert loading screen
+        Swal.fire({
+            title: 'Please Wait...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                Swal.close();
+            }
         });
-    </script>
+
+  xhr.onload = function() {
+    Swal.close(); // Close the SweetAlert loading screen
+
+    console.log(this.response); // Log the response to see what is returned
+
+    try {
+        var response = JSON.parse(this.response);
+    } catch (error) {
+        console.error('Invalid JSON response:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'There was an error with the request. The response was not valid JSON.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    if (this.status >= 200 && this.status < 400) {
+        // Success!
+        Swal.fire({
+            title: response.message,
+            icon: response.status === 'success' ? 'success' : 'error',
+            confirmButtonText: 'Login',
+            allowOutsideClick: false,
+            showCloseButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the login page after the user clicks 'Ok'
+                window.location.href = 'customer.php';
+            }
+        });
+    } else {
+        // Handle unexpected error responses
+        Swal.fire({
+            title: 'Error',
+            text: 'There was an error with the request. Please try again later.',
+            icon: 'error'
+        });
+    }
+};
+
+
+        xhr.onerror = function() {
+            // Handle connection errors
+            Swal.fire({
+                title: 'Error',
+                text: 'There was a connection error. Please check your network.',
+                icon: 'error'
+            });
+        };
+
+        xhr.send(formData); // Send the form data
+    });
+</script>
+
    </body>
 </html>

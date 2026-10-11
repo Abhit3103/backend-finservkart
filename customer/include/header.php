@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
    include_once('../include/config.php');
    if (strlen($_SESSION['id']==0)) {
     header('location:logout.php');
@@ -205,7 +205,12 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
             <!--<li>-->
             <!--  <a class="dropdown-item d-flex align-items-center" href="users-profile.html">-->
             <!--    <i class="bi bi-gear"></i>-->
@@ -225,12 +230,7 @@
             <!--  <hr class="dropdown-divider">-->
             <!--</li>-->
 
-            <!--<li>-->
-            <!--  <a class="dropdown-item d-flex align-items-center" href="logout.php">-->
-            <!--    <i class="bi bi-box-arrow-right"></i>-->
-            <!--    <span>Sign Out</span>-->
-            <!--  </a>-->
-            <!--</li>-->
+         
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->

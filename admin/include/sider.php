@@ -106,51 +106,42 @@
               <i class="bi bi-circle"></i><span>Manage CA</span>
             </a>
           </li>
+          <li>
+            <a href="ca-commission.php">
+              <i class="bi bi-circle"></i><span>Pending Commission</span>
+            </a>
+          </li>
+          <li>
+            <a href="ca-payments-reports.php">
+              <i class="bi bi-circle"></i><span>Payments Reports</span>
+            </a>
+          </li>
         </ul>
       </li>
       
       <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#franchise-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-shop"></i><span>Franchise</span>
+        <i class="bi bi-shop"></i><span>Frenchise</span>
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="franchise-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="manage-franchise.php">
-                <i class="bi bi-circle"></i><span>Manage Franchise</span>
+            <a href="manage-frenchise.php">
+                <i class="bi bi-circle"></i><span>Manage Frenchise</span>
             </a>
         </li>
-    </ul>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#master-franchise-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-building"></i><span>Master Franchise</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="master-franchise-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="manage-master-franchise.php">
-                <i class="bi bi-circle"></i><span>Manage Master Franchise</span>
+            <a href="french-commission.php">
+              <i class="bi bi-circle"></i><span>Pending Commission</span>
             </a>
-        </li>
+          </li>
+          <li>
+            <a href="french-payments-reports.php">
+              <i class="bi bi-circle"></i><span>Payments Reports</span>
+            </a>
+          </li>
     </ul>
 </li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#telecaller-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-telephone"></i><span>Telecaller</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="telecaller-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="manage-telecaller.php">
-                <i class="bi bi-circle"></i><span>Manage Telecaller</span>
-            </a>
-        </li>
-    </ul>
-</li>
-      
       <!-- End Tables Nav -->
 
       <li class="nav-item">

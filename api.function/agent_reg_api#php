@@ -4,10 +4,12 @@ date_default_timezone_set('Asia/Kolkata');
 $regDate = date('Y-m-d H:i:s');
 include('../smtp/PHPMailerAutoload.php');
 // Your database credentials and connection setup
+
+
 $host = 'localhost';
 $dbname = 'finservkart';
 $username = 'root';
-$password = '';
+$password = 'WindRed@12345';
 
 // Create a new MySQLi connection
 $conn = new mysqli($host, $username, $password, $dbname);

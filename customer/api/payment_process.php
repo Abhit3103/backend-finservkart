@@ -2,7 +2,7 @@
 // Database connection parameters
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'Taxfile@2024');
 define('DB_NAME', 'finservkart');
 date_default_timezone_set('Asia/Kolkata');
 include('../../smtp/PHPMailerAutoload.php');

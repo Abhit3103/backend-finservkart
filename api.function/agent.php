@@ -1,32 +1,74 @@
 <?php
 session_start();
+require '../smtp/PHPMailerAutoload.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 date_default_timezone_set('Asia/Kolkata');
-$regDate = date('Y-m-d H:i:s');
-$status = "Paid";
-include('../smtp/PHPMailerAutoload.php');
 
-// Your database credentials and connection setup
+// DB Credentials
 $host = 'localhost';
 $dbname = 'finservkart';
 $username = 'root';
-$password = '';
+$password = 'WindRed@12345';
 
-// Create a new MySQLi connection
+// DB Connection
 $conn = new mysqli($host, $username, $password, $dbname);
-
-// Check for connection errors
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(['status' => 'failed', 'message' => 'DB connection failed'])); // If DB connection fails
 }
 
-$toemail = $_POST['email'];
-$cname = $_POST['fname'];
-$cname = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
-$password = $_POST['password'];
-$subject = "Welcome To Finservkart";
+// Sanitize and get values
+$AGID = $conn->real_escape_string($_POST['AGID']);
+$fname = htmlspecialchars($_POST['fname'], ENT_QUOTES, 'UTF-8');
+$lname = htmlspecialchars($_POST['lname'], ENT_QUOTES, 'UTF-8');
+$email = $conn->real_escape_string($_POST['email']);
+$contact = $conn->real_escape_string($_POST['contact']);
+$password = $conn->real_escape_string($_POST['password']);
+$referral = substr($contact, -6);
+$address = $conn->real_escape_string($_POST['address']);
+$profile = $conn->real_escape_string($_POST['AGProfile']);
+$franchisecode = isset($_POST['franchisecode']) ? trim($_POST['franchisecode']) : '';
+$payment_id = isset($_POST['payment_id']) ? $_POST['payment_id'] : '';
+$pid = isset($_POST['pid']) ? $_POST['pid'] : '';
+$amt = isset($_POST['amt']) ? $_POST['amt'] : '0';
 
-// SMTP Mailer Function
-function smtp_mailer($to, $subject, $msg){
+$docZipPath = '';
+
+// Handle file uploads
+if (isset($_FILES['file']) && !empty($_FILES['file']['name'][0])) {
+    $zip = new ZipArchive();
+    $zip_file_name = 'uploads/agent/' . $AGID . '.zip';
+
+    if ($zip->open($zip_file_name, ZipArchive::CREATE) === true) {
+        foreach ($_FILES['file']['tmp_name'] as $key => $tmpName) {
+            $file_name = $_FILES['file']['name'][$key];
+            $zip->addFile($tmpName, $file_name);
+        }
+        $zip->close();
+        $docZipPath = $zip_file_name;
+    } else {
+        die(json_encode(['status' => 'failed', 'message' => 'Could not create zip'])); // If zip creation fails
+    }
+}
+
+// Send email
+$subject = "Welcome To Finservkart";
+$msg = <<<HTML
+<!doctype html>
+<html lang="en-US">
+<head><meta charset="UTF-8"><title>Finservkart</title></head>
+<body>
+<h2>Welcome, $fname!</h2>
+<p>Your registration is successful.</p>
+<p><strong>Email:</strong> $email</p>
+<p><strong>Password:</strong> $password</p>
+<p><a href="https://finservkart.com/apps/FinservKart-Agent.apk">Download App</a></p>
+<p>Thanks,<br>Team Finservkart</p>
+</body>
+</html>
+HTML;
+
+function smtp_mailer($to, $subject, $msg) {
     $mail = new PHPMailer(); 
     $mail->IsSMTP(); 
     $mail->SMTPAuth = true; 
@@ -39,75 +81,55 @@ function smtp_mailer($to, $subject, $msg){
     $mail->Password = "Finservkart@2024#&";
     $mail->SetFrom("info@finservkart.com", "Finservkart");
     $mail->Subject = $subject;
-    $mail->Body =$msg;
+    $mail->Body = $msg;
     $mail->AddAddress($to);
-    $mail->SMTPOptions=array('ssl'=>array(
-        'verify_peer'=>false,
-        'verify_peer_name'=>false,
-        'allow_self_signed'=>false
-        ));
+    $mail->SMTPOptions = ['ssl' => ['verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => false]];
     $mail->Send();
 }
 
+// Insert into agent table
+$regDate = date('Y-m-d H:i:s'); // Assign separately
+$is_approved = 0;
+$stmt = $conn->prepare("INSERT INTO agent (AGID, fname, lname, email, phone, doc, password, referral, regDate, AGProfile, franchisecode, address, is_approved) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssssssssss", $AGID, $fname, $lname, $email, $contact, $docZipPath, $password, $referral, $regDate, $profile, $franchisecode, $address, $is_approved);
+$response = [];
 
-$msg = <<<HTML
-<!doctypehtml><html lang=en-US><meta content="text/html; charset=utf-8"http-equiv=Content-Type><title>Finservkart</title><style>a:hover{text-decoration:underline!important}</style><body leftmargin=0 marginheight=0 marginwidth=0 style=margin:0;background-color:#fff topmargin=0><table border=0 cellpadding=0 cellspacing=0 style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700);font-family:'Open Sans',sans-serif"width=100% bgcolor=#fff><tr><td><table border=0 cellpadding=0 cellspacing=0 style="background-color:#fff;max-width:670px;margin:0 auto"width=100% align=center><tr><td style=height:80px><tr><td style=text-align:center><a href=https://finservkart.com/ target=_blank title=logo><img alt=logo src=https://finservkart.com/img/email-logo.png title=logo width=120></a><tr><td style=height:20px><tr><td><table border=0 cellpadding=0 cellspacing=0 style="max-width:670px;background:#fff;border-radius:3px;text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06)"width=95% align=center><tr><td style=height:40px><tr><td style="padding:0 35px"><h1 style=color:#1e1e2d;font-weight:500;margin:0;font-size:32px;font-family:Rubik,sans-serif>Welcome</h1><p align=left text style="font-size:15px;color:#455056;margin:8px 0 0;line-height:24px">Dear $cname;<br>Congratulations and welcome to Finservkart! We are thrilled to have you as a member of our financial services platform. Your registration has been successfully completed, and you are now ready to explore the wide range of financial products and services we offer..<p align=left text style="font-size:15px;color:#455056;margin:8px 0 0;line-height:24px"><strong>Here are your login details:</strong><br><b>📧 Email ID : $toemail</b><br><b>🔑 Password : $password</b><br/><a href="https://finservkart.com/apps/FinservKart-Agent.apk"><button style="background-color:#1204aa;border:none;color:#fff;padding:15px 15px;text-align:center;text-decoration:none;display:inline-block;font-size:16px;margin:2px 2px;cursor:pointer">Download Apps</button></a><br/>With these credentials, you can access your Finservkart account anytime, anywhere, and start managing your finances with ease.<br>If you have any questions or need assistance at any point, our dedicated customer support team is here to help. Simply reach out to us via email at <a href=mailto:support@finservkart.com>support@finservkart.com</a>, and we'll be happy to assist you.<br>Thank you for choosing Finservkart. We look forward to serving you and helping you achieve your financial goals.<p align=right text><br>Regards,<br>Team Finservkart</p><span style="display:inline-block;vertical-align:middle;margin:29px 0 26px;border-bottom:1px solid #cecece;width:100px"></span><tr><td style=height:40px></table><tr><td style=height:20px><tr><td style=text-align:center><p style="font-size:14px;color:rgba(69,80,86,.7411764705882353);line-height:18px;margin:0 0 0"><strong>www.finservkart.com</strong><tr><td style=height:80px></table></table>
+if ($stmt->execute()) {
+// Admin ko mail
+$adminEmail = "info@finservkart.com";
+$adminSubject = "New Agent Registration - $fname $lname";
+$adminMsg = <<<HTML
+<html>
+<body>
+<p>New agent <strong>$fname $lname</strong> has registered.</p>
+<p><strong>Email:</strong> $email<br><strong>Phone:</strong> $contact</p>
+<p>Please review and approve the registration in admin panel.</p>
+</body>
+</html>
 HTML;
 
+smtp_mailer($adminEmail, $adminSubject, $adminMsg);
 
-// Check if files are uploaded
-if(isset($_FILES['file']) && !empty($_FILES['file'])) {
-    // Initialize the ZipArchive class
-    $zip = new ZipArchive();
-
-    // Sanitize and escape the CAID value for use in a filename
-    $agid = $conn->real_escape_string($_POST['AGID']);
-    // Set the name of our zip archive with the CAID value
-    $zip_file_name = 'uploads/agent/' . $agid . '.zip'; // Make sure the directory exists and is writable
-
-    // Create the new zip archive
-    if($zip->open($zip_file_name, ZipArchive::CREATE) === true) {
-        // Loop through the tmp_name of the files in $_FILES array
-        foreach($_FILES['file']['tmp_name'] as $key => $tmpName){
-            // Get the name of the file
-            $file_name = $_FILES['file']['name'][$key];
-            // Add the file
-            $zip->addFile($tmpName, $file_name);
-        }
-        // Close the archive
-        $zip->close();
-    } else {
-        die("Couldn't create Zip Archive");
-    }
-}
-
-
-// Prepare the SQL statement for insertion
-$stmt = $conn->prepare("INSERT INTO agent (AGID, fname, lname, email, phone, doc, password, referral, regDate, AGProfile) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssssss", $_POST['AGID'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['contact'], $zip_file_name, $_POST['password'], $_POST['referral'], $regDate, $_POST['AGProfile']);
-
-// Execute the statement
-if ($stmt->execute()) {
-    smtp_mailer($toemail, $subject, $msg);
-    // Prepare and execute the SQL query for agents_pay
+  if (!empty($payment_id)) {
     $stmtPay = $conn->prepare("INSERT INTO agents_pay (payment_id, pid, amt, agid, status, regdate) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmtPay->bind_param("ssssss", $_POST['payment_id'], $_POST['pid'], $_POST['amt'], $_POST['AGID'], $status, $regDate);
-    
+    $status = 'Paid';
+    $stmtPay->bind_param("ssssss", $payment_id, $pid, $amt, $AGID, $status, $regDate);
+
     if ($stmtPay->execute()) {
-        $response['status'] = 'success';
-        $response['message'] = 'Registered Successfully';
+      $response = ['status' => 'success', 'message' => 'Registration successful. Please wait for admin approval.'];
     } else {
-        $response['status'] = 'failed';
-        $response['message'] = 'Failed Try Again: ' . $conn->error;
+      $response = ['status' => 'failed', 'message' => 'Payment entry failed: ' . $conn->error];
     }
+
+  } else {
+    $response = ['status' => 'success', 'message' => 'Registration successful. Please wait for admin approval.'];
+  }
+
 } else {
-    $response['status'] = 'failed';
-    $response['message'] = 'Try Again: ' . $conn->error;
+  $response = ['status' => 'failed', 'message' => 'Registration failed: ' . $conn->error];
 }
 
-// Output the response as JSON
+// Final JSON output
 echo json_encode($response);
-
-// Close the MySQLi connection
-$conn->close();
 ?>

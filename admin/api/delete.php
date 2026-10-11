@@ -24,17 +24,6 @@ if ($conn) {
         case "contact":
             delete($conn, $type, $id, "contact.php?isDeleted=true");
             break;
-            case "franchise": // Added franchise delete
-                delete($conn, "franchise", $id, "manage-franchise.php?isDeleted=true");
-                break;
-                
-                case "master_franchise": // Added Master Franchise Delete
-                    delete($conn, "master_franchise", $id, "manage-master-franchise.php?isDeleted=true");
-                    break;
-
-                    case "telecaller":
-                        delete($conn, $type, $id, "manage-telecaller.php?isDeleted=true");
-                        break;
         default:
             break;
     }

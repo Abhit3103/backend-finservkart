@@ -163,6 +163,12 @@
       </div>
     </div>
   </div>
+    <script>
+ 
+  window.onafterprint = function(){
+    window.location.href = "dashboard.php"; 
+  };
+</script>
   <script src="../customer/assets/jquery.min.js"></script>
   <script src="../customer/assets/jspdf.min.js"></script>
   <script src="../customer/assets/html2canvas.min.js"></script>

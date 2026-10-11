@@ -2,8 +2,8 @@
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "finservcart";
+$password = "WindRed@12345";
+$dbname = "finservkart";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

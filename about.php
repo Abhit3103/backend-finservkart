@@ -26,10 +26,10 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -39,11 +39,14 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Modern Premium CSS -->
+    <link href="css/modern-premium.css" rel="stylesheet">
+
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="font-family: 'Poppins', sans-serif;">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
@@ -56,8 +59,8 @@
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-            <h1 class="display-3 mb-4 animated slideInDown">About</h1>
+        <div class="container position-relative z-1">
+            <h1 class="display-3 mb-4 animated slideInDown">About Us</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -70,80 +73,79 @@
 
 
     <!-- About Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
         <div class="container">
-            <div class="row g-4 align-items-end mb-4">
+            <div class="row g-5 align-items-center mb-4">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <img class="img-fluid rounded" src="img/about.jpg">
+                    <div style="position: relative; border-radius: 20px; overflow: visible; box-shadow: 0 20px 50px rgba(37, 99, 235, 0.2);">
+                        <img class="img-fluid" src="img/about.jpg" style="width: 100%; height: auto; display: block; border-radius: 20px;">
+                        <div style="position: absolute; top: -15px; right: 20px; background: linear-gradient(135deg, #2563eb, #10b981); padding: 15px 25px; border-radius: 50px; color: white; font-weight: 600; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);">Premium Service</div>
+                    </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Welcome to Finservkart </p>
-                    <h1 class="display-5 mb-4">Your Trusted Partner in Financial Services</h1>
-                    <p class="mb-4">At Finservkart, we understand the intricate dynamics of the financial landscape, and we are dedicated to empowering individuals and businesses with tailored financial solutions. With a commitment to excellence, integrity, and innovation, we have positioned ourselves as a leading player in the finance services industry.</p>
-                    <p>Trust is the foundation of our relationship with clients. Finservkart operates with the highest standards of transparency and ethical conduct. Our commitment to integrity ensures that you can have complete confidence in the services we provide.<br/>Discover the Finservkart advantage - where expertise meets innovation, and your financial goals become our mission.</p>
-                    <div class="border rounded p-4">
+                    <p class="d-inline-block border rounded text-primary fw-semi-bold py-2 px-4" style="background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%); border: 2px solid #2563eb !important; border-radius: 50px; color: #1e40af !important;">Welcome to Finservkart</p>
+                    <h1 class="display-5 mb-4" style="color: #1a202c; font-weight: 700; margin-top: 15px;">Your Trusted Partner in Financial Services</h1>
+                    <p class="mb-4" style="color: #2d3748; font-size: 1.05rem; line-height: 1.8; font-weight: 500;">At Finservkart, we understand the intricate dynamics of the financial landscape, and we are dedicated to empowering individuals and businesses with tailored financial solutions. With a commitment to excellence, integrity, and innovation, we have positioned ourselves as a leading player in the finance services industry.</p>
+                    <p style="color: #475569; font-size: 1rem; line-height: 1.8;">Trust is the foundation of our relationship with clients. Finservkart operates with the highest standards of transparency and ethical conduct. Our commitment to integrity ensures that you can have complete confidence in the services we provide.<br/>Discover the Finservkart advantage - where expertise meets innovation, and your financial goals become our mission.</p>
+                    <div class="border-0 rounded p-5" style="background: white; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1) !important;">
                         <nav>
-                            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                                <button class="nav-link fw-semi-bold active" id="nav-story-tab" data-bs-toggle="tab" data-bs-target="#nav-story" type="button" role="tab" aria-controls="nav-story" aria-selected="true">Story</button>
-                                <button class="nav-link fw-semi-bold" id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission" type="button" role="tab" aria-controls="nav-mission" aria-selected="false">Mission</button>
-                                <button class="nav-link fw-semi-bold" id="nav-vision-tab" data-bs-toggle="tab" data-bs-target="#nav-vision" type="button" role="tab" aria-controls="nav-vision" aria-selected="false">Vision</button>
+                            <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist" style="border-bottom: 2px solid #e2e8f0;">
+                                <button class="nav-link fw-semi-bold active" id="nav-story-tab" data-bs-toggle="tab" data-bs-target="#nav-story" type="button" role="tab" aria-controls="nav-story" aria-selected="true" style="color: #475569; border: none; padding: 10px 20px; border-bottom: 3px solid transparent; transition: all 0.3s ease;">Story</button>
+                                <button class="nav-link fw-semi-bold" id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission" type="button" role="tab" aria-controls="nav-mission" aria-selected="false" style="color: #475569; border: none; padding: 10px 20px; border-bottom: 3px solid transparent; transition: all 0.3s ease;">Mission</button>
+                                <button class="nav-link fw-semi-bold" id="nav-vision-tab" data-bs-toggle="tab" data-bs-target="#nav-vision" type="button" role="tab" aria-controls="nav-vision" aria-selected="false" style="color: #475569; border: none; padding: 10px 20px; border-bottom: 3px solid transparent; transition: all 0.3s ease;">Vision</button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-story" role="tabpanel" aria-labelledby="nav-story-tab">
-                                <p>Born from a passion for transforming financial experiences, FinservKart has evolved into a trusted partner, leveraging expertise and technology to make finance seamless and rewarding for everyone.</p>
+                                <p style="color: #2d3748; font-size: 1rem; line-height: 1.8;">Born from a passion for transforming financial experiences, FinservKart has evolved into a trusted partner, leveraging expertise and technology to make finance seamless and rewarding for everyone.</p>
                             </div>
                             <div class="tab-pane fade" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <p>Empower individuals and businesses by simplifying finance and providing accessible, personalized solutions that help them achieve their financial goals.</p>
+                                <p style="color: #2d3748; font-size: 1rem; line-height: 1.8;">Empower individuals and businesses by simplifying finance and providing accessible, personalized solutions that help them achieve their financial goals.</p>
                             </div>
                             <div class="tab-pane fade" id="nav-vision" role="tabpanel" aria-labelledby="nav-vision-tab">
-                                <p>To be a leading force in revolutionizing the financial services landscape through innovation, transparency, and a customer-centric approach.</p>
+                                <p style="color: #2d3748; font-size: 1rem; line-height: 1.8;">To be a leading force in revolutionizing the financial services landscape through innovation, transparency, and a customer-centric approach.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="border rounded p-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="border-0 rounded p-5 wow fadeInUp" data-wow-delay="0.1s" style="background: white; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1) !important;">
                 <div class="row g-4">
                     <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="h-100">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
-                                    <i class="fa fa-times text-white"></i>
+                        <div class="h-100 p-4" style="background: linear-gradient(135deg, #f0f7ff 0%, #f9fbff 100%); border-radius: 16px; border-left: 4px solid #2563eb;">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle" style="background: linear-gradient(135deg, #2563eb, #1e40af); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <i class="fa fa-times text-white" style="font-size: 1.5rem;"></i>
                                 </div>
-                                <div class="ps-3">
-                                    <h4>No Hidden Cost</h4>
-                                    <span>Transparent and straightforward pricing for your peace of mind</span>
+                                <div class="ps-4">
+                                    <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 8px;">No Hidden Cost</h4>
+                                    <span style="color: #475569; font-size: 0.95rem; line-height: 1.6;">Transparent and straightforward pricing for your peace of mind</span>
                                 </div>
-                                <div class="border-end d-none d-lg-block"></div>
                             </div>
-                            <div class="border-bottom mt-4 d-block d-lg-none"></div>
                         </div>
                     </div>
                     <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                        <div class="h-100">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
-                                    <i class="fa fa-users text-white"></i>
+                        <div class="h-100 p-4" style="background: linear-gradient(135deg, #f0f7ff 0%, #f9fbff 100%); border-radius: 16px; border-left: 4px solid #10b981;">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle" style="background: linear-gradient(135deg, #10b981, #059669); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <i class="fa fa-users text-white" style="font-size: 1.5rem;"></i>
                                 </div>
-                                <div class="ps-3">
-                                    <h4>Dedicated Team</h4>
-                                    <span>Committed experts working together for your success</span>
+                                <div class="ps-4">
+                                    <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 8px;">Dedicated Team</h4>
+                                    <span style="color: #475569; font-size: 0.95rem; line-height: 1.6;">Committed experts working together for your success</span>
                                 </div>
-                                <div class="border-end d-none d-lg-block"></div>
                             </div>
-                            <div class="border-bottom mt-4 d-block d-lg-none"></div>
                         </div>
                     </div>
                     <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="h-100">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
-                                    <i class="fa fa-phone text-white"></i>
+                        <div class="h-100 p-4" style="background: linear-gradient(135deg, #f0f7ff 0%, #f9fbff 100%); border-radius: 16px; border-left: 4px solid #f59e0b;">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle" style="background: linear-gradient(135deg, #f59e0b, #d97706); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <i class="fa fa-phone text-white" style="font-size: 1.5rem;"></i>
                                 </div>
-                                <div class="ps-3">
-                                    <h4>24/7 Available</h4>
-                                    <span>Always here for you, 24/7</span>
+                                <div class="ps-4">
+                                    <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 8px;">24/7 Available</h4>
+                                    <span style="color: #475569; font-size: 0.95rem; line-height: 1.6;">Always here for you, 24/7</span>
                                 </div>
                             </div>
                         </div>
@@ -156,32 +158,40 @@
 
 
     <!-- Facts Start -->
-    <div class="container-fluid facts my-5 py-5">
+    <div class="container-fluid facts my-5 py-5" style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-users fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-                    <span class="fs-5 text-white">Happy Clients</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <i class="fa fa-users fa-3x text-white mb-3"></i>
+                        <h1 class="display-4 text-white" data-toggle="counter-up" style="font-weight: 700; margin: 15px 0;">1234</h1>
+                        <span class="fs-5 text-white" style="font-weight: 500;">Happy Clients</span>
+                        <hr class="bg-white w-25 mx-auto mb-0" style="margin-top: 15px; opacity: 0.3;">
+                    </div>
                 </div>
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-check fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-                    <span class="fs-5 text-white">Projects Completed</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <i class="fa fa-check fa-3x text-white mb-3"></i>
+                        <h1 class="display-4 text-white" data-toggle="counter-up" style="font-weight: 700; margin: 15px 0;">1234</h1>
+                        <span class="fs-5 text-white" style="font-weight: 500;">Projects Completed</span>
+                        <hr class="bg-white w-25 mx-auto mb-0" style="margin-top: 15px; opacity: 0.3;">
+                    </div>
                 </div>
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-                    <span class="fs-5 text-white">Dedicated Staff</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
+                        <h1 class="display-4 text-white" data-toggle="counter-up" style="font-weight: 700; margin: 15px 0;">1234</h1>
+                        <span class="fs-5 text-white" style="font-weight: 500;">Dedicated Staff</span>
+                        <hr class="bg-white w-25 mx-auto mb-0" style="margin-top: 15px; opacity: 0.3;">
+                    </div>
                 </div>
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                    <i class="fa fa-award fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-                    <span class="fs-5 text-white">Awards Achieved</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <i class="fa fa-award fa-3x text-white mb-3"></i>
+                        <h1 class="display-4 text-white" data-toggle="counter-up" style="font-weight: 700; margin: 15px 0;">1234</h1>
+                        <span class="fs-5 text-white" style="font-weight: 500;">Awards Achieved</span>
+                        <hr class="bg-white w-25 mx-auto mb-0" style="margin-top: 15px; opacity: 0.3;">
+                    </div>
                 </div>
             </div>
         </div>

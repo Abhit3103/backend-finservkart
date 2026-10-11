@@ -3,5 +3,5 @@ session_start();
 session_destroy();
 ?>
 <script language="javascript">
-document.location="../user-login.php";
+document.location="../customer.php";
 </script>

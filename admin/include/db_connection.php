@@ -1,9 +1,9 @@
 <?php
 // Database connection details
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "finservcart";
+define('DB_USER','root');
+define('DB_PASS' ,'WindRed@12345');
+$dbname = "finservkart";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -9,12 +9,31 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
+     <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-wallet2"></i><span>Payout</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="pending-commission.php">
+              <i class="bi bi-circle"></i><span>Pending Commission</span>
+            </a>
+          </li>
+          <li>
+            <a href="payments-reports.php">
+              <i class="bi bi-circle"></i><span>Payments Reports</span>
+            </a>
+          </li>
+        </ul>
+      </li>
        <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#work-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bricks"></i><span>Workflow</span>
           <i class="bi bi-chevron-down ms-auto"></i>
         </a>
+
+         
         <ul id="work-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="my-workflow.php">

@@ -1,12 +1,14 @@
 <?php
-if (!defined('DB_SERVER')) define('DB_SERVER', 'localhost');
-if (!defined('DB_USER')) define('DB_USER', 'root');
-if (!defined('DB_PASS')) define('DB_PASS', '');
-if (!defined('DB_NAME')) define('DB_NAME', 'finservcart');
-$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+define('DB_SERVER','localhost');
+define('DB_USER','root');
+define('DB_PASS' ,'WindRed@12345');
+define('DB_NAME', 'finservkart');
+$con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
 
-// Check connection
-if (mysqli_connect_errno()) {
-    die("Failed to connect to MySQL: " . mysqli_connect_error());
-}
+if (mysqli_connect_errno())
+{
+echo "Failed to connect to MySQL: " . mysqli_connect_error();
+ }
+
 ?>
+

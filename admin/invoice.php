@@ -1,9 +1,5 @@
-<?php session_start();
-   include_once('../include/config.php');
-   if (strlen($_SESSION['adminid']==0)) {
-    header('location:logout.php');
-    die();
-   }
+<?php 
+   include_once('include/config.php');
    $pid = $_GET['pid'];
    $query=mysqli_query($con,"SELECT * FROM srv_tranaction JOIN customer ON srv_tranaction.CustID = customer.CustID WHERE srv_tranaction.pID = '$pid'");
    while($result=mysqli_fetch_array($query)){
@@ -30,7 +26,7 @@
   <meta name="author" content="Laralink">
   <!-- Site Title -->
   <title><?= $name ?>-<?= $pid ?> </title>
-  <link rel="stylesheet" href="../customer/assets/style.css">
+  <link rel="stylesheet" href="customer/assets/style.css">
 </head>
 
 <body>
@@ -131,14 +127,14 @@
                   </tbody>
                 </table>
                 <div class="tm_shape_3 tm_accent_bg_10"></div>
-                <center><img src="../customer/assets/paid.png" height="100" width="100"></center>
+                <center><img src="customer/assets/paid.png" height="100" width="100"></center>
               </div>
             </div>
             <div class="tm_invoice_footer tm_type1">
               <div class="tm_left_footer"></div>
               <div class="tm_right_footer">
                 <div class="tm_sign tm_text_center">
-                  <img src="assets/sign.png" alt="Sign">
+                  <img src="admin/assets/sign.png" alt="Sign">
                   <p class="tm_m0 tm_ternary_color">Subhawati Devi</p>
                   <p class="tm_m0 tm_f16 tm_primary_color">Founder & Owner</p>
                 </div>
@@ -163,9 +159,9 @@
       </div>
     </div>
   </div>
-  <script src="../customer/assets/jquery.min.js"></script>
-  <script src="../customer/assets/jspdf.min.js"></script>
-  <script src="../customer/assets/html2canvas.min.js"></script>
-  <script src="../customer/assets/main.js"></script>
+  <script src="customer/assets/jquery.min.js"></script>
+  <script src="customer/assets/jspdf.min.js"></script>
+  <script src="customer/assets/html2canvas.min.js"></script>
+  <script src="customer/assets/main.js"></script>
 </body>
 </html>

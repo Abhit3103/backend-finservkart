@@ -83,11 +83,11 @@
          top:   50%;
          right:   50%;
          transform: translate(50%, -50%);
-         font-size:   1.5rem; /* Adjust size as needed */
-         color: white; /* Adjust color as needed */
+         font-size:   1.5rem; 
+         color: white; 
          cursor: pointer;
-         opacity:  0; /* Hide the icon by default */
-         transition: opacity  0.3s ease; /* Smooth transition */
+         opacity:  0; 
+         transition: opacity  0.3s ease; 
          }
          .profile-pic:hover .pencil-icon {
          opacity:  1; /* Show the icon on hover */

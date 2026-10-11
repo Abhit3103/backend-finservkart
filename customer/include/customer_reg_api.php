@@ -6,7 +6,7 @@ include('../../smtp/PHPMailerAutoload.php');
 $host = 'localhost';
 $dbname = 'finservkart';
 $username = 'root';
-$password = '';
+$password = 'Taxfile@2024';
 
 // Create a new MySQLi connection
 $conn = new mysqli($host, $username, $password, $dbname);
@@ -129,16 +129,18 @@ $msg = <<<HTML
 HTML;
 
 // Prepare the SQL statement for insertion
-$sql = sprintf("INSERT INTO customer (CustID, fname, lname, email, phone, password, referral, regDate, CProfile) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+$sql = sprintf("INSERT INTO customer (CustID, fname, lname, email, phone, address, password, referral, regDate, CProfile ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' , '%s')",
     $conn->real_escape_string($_POST['CID']),
     $conn->real_escape_string($_POST['fname']),
     $conn->real_escape_string($_POST['lname']),
     $conn->real_escape_string($_POST['email']),
     $conn->real_escape_string($_POST['phone']),
+    $conn->real_escape_string($_POST['address']),
     $conn->real_escape_string($_POST['password']),
     $conn->real_escape_string($_POST['referral']),
     $conn->real_escape_string($regDate),
-    $conn->real_escape_string($_POST['CProfile']),
+    $conn->real_escape_string($_POST['CProfile'])
+
 );
 
 // Initialize the response array

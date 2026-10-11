@@ -29,9 +29,9 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Support</h4>
-                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
-                    <a class="btn btn-link" href="terms-and-conditions.html">Terms & Condition</a>
-                    <a class="btn btn-link" href="refund-policy.html">Refund & Cancellation</a>
+                    <a class="btn btn-link" href="privacy-policy.php">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-and-conditions.php">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-policy.php">Refund & Cancellation</a>
                 </div>
             </div>
         </div>

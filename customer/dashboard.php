@@ -1,14 +1,41 @@
-<?php session_start();
-   include_once('../include/config.php');
-   if (strlen($_SESSION['id']==0)) {
+<?php
+session_start();
+include_once('../include/config.php');
+
+// Check if session exists
+if (strlen($_SESSION['id']) == 0) {
     header('location:logout.php');
+}
+
+$userid = $_SESSION['id']; 
+
+// Query to fetch customer details based on session id
+$query = mysqli_query($con, "SELECT * FROM customer WHERE id='$userid'");
+
+// Check if query returns result
+while ($result = mysqli_fetch_array($query)) {
+    $CustID = $result['CustID'];
+    $referral = $result['referral'];  // Referral from customer table
+}
+
+// Now, query to fetch agent details based on customer referral
+$agent_query = mysqli_query($con, "SELECT agent.id AS AGID, agent.fname, agent.lname 
+                                   FROM agent 
+                                   WHERE agent.referral = '$referral'");
+
+if ($agent_query) {
+    $agent_result = mysqli_fetch_array($agent_query);
+    if ($agent_result) {
+        $agent_id = $agent_result['AGID'];       // Agent ID
+        $agent_fname = $agent_result['fname'];   // Agent First Name
+        $agent_lname = $agent_result['lname'];   // Agent Last Name
+    } else {
+        $agent_id = "N/A";
+        $agent_fname = "";
+        $agent_lname = "N/A";
     }
-   $userid=$_SESSION['id'];
-   $query=mysqli_query($con,"select * from customer where id='$userid'");
-   while($result=mysqli_fetch_array($query))
-   {
-       $CustID = $result['CustID'];
-   ?>
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -67,15 +94,22 @@
         });
       </script>
       <main id="main" class="main">
-         <div class="pagetitle">
-            <h1>Dashboard</h1>
-            <nav>
-               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                  <li class="breadcrumb-item active">Dashboard</li>
-               </ol>
-            </nav>
-         </div>
+        <div class="pagetitle d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+    
+    <div class="text-end">
+        <small><strong>Agent ID:</strong> <?php echo $agent_id ?? 'N/A'; ?></small><br>
+        <small><strong>Agent Name:</strong> <?php echo $agent_fname . ' ' . $agent_lname ?? 'N/A'; ?></small>
+    </div>
+</div>
         <?php
         $query2 = "SELECT IFSE, bank, branch, ACNo FROM customer WHERE id='$userid'";
         $result2 = mysqli_query($con, $query2);
@@ -508,4 +542,3 @@
       </script>
    </body>
 </html>
-<?php } ?>

@@ -46,15 +46,17 @@
       <!-- Google Web Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
       <!-- Icon Font Stylesheet -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
       <!-- Libraries Stylesheet -->
       <link href="lib/animate/animate.min.css" rel="stylesheet">
       <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
       <!-- Customized Bootstrap Stylesheet -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Modern Premium CSS -->
+      <link href="css/modern-premium.css" rel="stylesheet">
       <!-- Template Stylesheet -->
       <link href="css/style.css" rel="stylesheet">
       <style>
@@ -109,7 +111,7 @@
          }
       </style>
    </head>
-   <body>
+   <body style="font-family: 'Poppins', sans-serif;">
       <!-- Spinner Start -->
       <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
@@ -118,12 +120,11 @@
       <?php include("include/header.php"); ?>
       <!-- Page Header Start -->
       <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
-         <div class="container">
-            <h1 class="display-3 mb-4 animated slideInDown">Signup</h1>
+         <div class="container position-relative z-1">
+            <h1 class="display-3 mb-4 animated slideInDown">Agent Registration</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                  <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Agent Signup</li>
                </ol>
             </nav>
@@ -137,7 +138,7 @@
                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                   <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Signup</p>
                   <h1 class="display-5 mb-4">Agent Register</h1>
-                  <form action="" method="post" enctype="multipart/form-data">
+                     <form id="myForm" enctype="multipart/form-data">
                      <input type="hidden" class="form-control" name="AGID" id="AGID">
                      <input type="hidden" class="form-control" name="AGProfile" id="AGProfile" value="avatar.png">
                      <div class="row g-3">
@@ -149,7 +150,7 @@
                         </div>
                         <div class="col-md-6">
                            <div class="form-floating">
-                              <input type="text" class="form-control" name="lname" id="laname" placeholder="Last Name" autocomplete="new-lsname" required>
+                              <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" autocomplete="new-lsname" required>
                               <label for="email">Last Name</label>
                            </div>
                         </div>
@@ -165,11 +166,26 @@
                               <label for="subject">Contact No</label>
                            </div>
                         </div>
-                        <div class="col-12">
-                           <div class="form-floating">
-                              <input type="file" name="file[]" id="file"  accept=".xlsx, .xls, .csv, .pdf, .png, .jpg, .jpeg, .doc, .docx, .txt, .pptx, .zip, .rar" multiple required>
-                           </div>
-                        </div>
+                      <div class="col-md-6">
+   <div class="form-floating">
+      <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
+      <label for="address">Address</label>
+   </div>
+</div>
+
+                        <div class="col-md-6">
+   <div class="form-floating">
+      <input type="text" class="form-control" name="franchisecode" id="franchisecode" placeholder="Franchise Referral Code" maxlength="10" autocomplete="off">
+      <label for="franchisecode">Franchise Referral Code</label>
+   </div>
+</div>
+                       <div class="col-12">
+   <label for="file" class="form-label">Upload Documents</label>
+   <div class="form-floating">
+      <input type="file" name="file[]" id="file" accept=".xlsx, .xls, .csv, .pdf, .png, .jpg, .jpeg, .doc, .docx, .txt, .pptx, .zip, .rar" multiple required>
+   </div>
+</div>
+
                         <!--<label>Amount (INR):</label>-->
                        <input type="hidden" name="amount" id="amount" value="500">
 
@@ -225,7 +241,7 @@
                         <div class="col-12">
                            <button class="btn btn-primary py-3 px-5" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Signup</button>
                         </div>
-                        <h5><b style="color:green;">Already have an account? </b><a href="agent-login.php">Log In</a></h5>
+                        <h5><b style="color:green;">Already have an account? </b><a href="agent.php">Log In</a></h5>
                      </div>
                   </form>
                </div>
@@ -237,72 +253,80 @@
             </div>
          </div>
       </div>
-      <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
-    include 'Authentication.php'; // Make sure this file has the AesCipher class
-
-    // SabPaisa credentials
-    $clientCode = "FMHC87";
-    $username = "finservkart.com@gmail.com";
-    $password = "FMHC87_SP19912";
-    $authKey = "MpyemajI9BKhniSX";
-    $authIV = "wXk7nilYzPsoKfzU";
-
-    // Collect form data
-    $fname = $_POST['fname'] ?? '';
-    $lname = $_POST['lname'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $mobile = $_POST['contact'] ?? '';
-    $amount = $_POST['amount'] ?? 0;
-    $payerName = $fname . ' ' . $lname;
-    $payerAddress = "Patna, Bihar";
-    $clientTxnId = uniqid("TXN");
-    $callbackUrl = 'https://finservcart.com/SabPaisaPostPgResponse.php';
-    $returnUrl = 'https://finservcart.com/agent/signup.php';
-    $mcc = 5137;
-    $channelId = 'W';
-
-    // Optionally handle file upload
-    if ($_FILES['file']['error'] === 0) {
-        $uploadDir = 'uploads/';
-        $fileName = basename($_FILES['file']['name']);
-        $targetFile = $uploadDir . time() . '_' . $fileName;
-        move_uploaded_file($_FILES['file']['tmp_name'], $targetFile);
-    }
-
-    // Prepare encrypted data
-    $encData = "?clientCode=" . urlencode($clientCode) .
-               "&transUserName=" . urlencode($username) .
-               "&transUserPassword=" . urlencode($password) .
-               "&payerName=" . urlencode($payerName) .
-               "&payerMobile=" . urlencode($mobile) .
-               "&payerEmail=" . urlencode($email) .
-               "&payerAddress=" . urlencode($payerAddress) .
-               "&clientTxnId=" . urlencode($clientTxnId) .
-               "&amount=" . urlencode($amount) .
-               "&amountType=INR" .
-               "&mcc=" . urlencode($mcc) .
-               "&channelId=" . urlencode($channelId) .
-               "&callbackUrl=" . urlencode($callbackUrl) .
-               "&returnUrl=" . urlencode($returnUrl);
-
-    $AesCipher = new AesCipher();
-    $data = $AesCipher->encrypt($authKey, $authIV, $encData);
-
-    // Show auto-submit payment form
-    echo '
-    <form id="paymentForm" action="https://securepay.sabpaisa.in/SabPaisa/sabPaisaInit?v=1" method="post">
-        <input type="hidden" name="encData" value="' . htmlspecialchars($data) . '">
-        <input type="hidden" name="clientCode" value="' . htmlspecialchars($clientCode) . '">
-    </form>
-    <script>document.getElementById("paymentForm").submit();</script>
-    ';
-    exit;
-}
-?>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+    $("#myForm").on("submit", function (e) {
+        e.preventDefault();
+
+        var form = this;
+        var formData = new FormData(form);
+
+        var razorpayKey = "rzp_live_ICzjw9iEib4V6g";
+        var amount = parseFloat(formData.get('amt')) * 100;
+        var phone = formData.get('contact');
+
+        var options = {
+            key: razorpayKey,
+            amount: amount,
+            currency: "INR",
+            name: "Finservkart",
+            description: "Agent's Registration Fees",
+            image: "logo.png",
+            prefill: {
+                contact: phone
+            },
+            handler: function (response) {
+                formData.append("payment_id", response.razorpay_payment_id);
+
+                $.ajax({
+                    url: "./api.function/agent.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (finalResult) {
+                        var r = JSON.parse(finalResult);
+                        if (r.status === 'success') {
+                            Swal.fire({
+                                title: r.message,
+                                icon: 'success',
+                                confirmButtonText: 'Login',
+                                 showCloseButton: true
+                            }).then(() => {
+                                // ✅ Form reset here
+                                form.reset();
+
+                              // ✅ Manually clear file inputs (not always reset by form.reset())
+        $(form).find('input[type="file"]').val('');
+
+        // ✅ Manually clear selects or any special inputs if used
+        $(form).find('select').prop('selectedIndex', 0); // If you're using dropdowns
+        $(form).find('textarea').val(''); // If you're using textareas
+
+
+                                // ✅ Redirect
+                                window.location.href = "agent.php";
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error',
+                                text: r.message,
+                                icon: 'error'
+                            });
+                        }
+                    }
+                });
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    });
+</script>
+
       <!-- Contact End -->
       <?php include("include/footer.php"); ?>
       <!-- Back to Top -->

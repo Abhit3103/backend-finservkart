@@ -3,8 +3,7 @@
 $host = 'localhost';
 $dbname = 'finservkart';
 $username = 'root';
-$password = '';
-
+$password = 'WindRed@12345';
 // Create a new MySQLi connection
 $conn = new mysqli($host, $username, $password, $dbname);
 

@@ -1,8 +1,8 @@
 <?php
 // Database connection details
 $servername = "localhost";
-$username = "root ";
-$password = "";
+$username = "root";
+$password = "Taxfile@2024";
 $dbname = "finservkart";
 
 // Create connection

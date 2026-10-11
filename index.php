@@ -5,34 +5,34 @@ include("capture.php");
 <html lang="en">
 <head>
     <meta charset="utf-8">
-      <title>Finservkart | Financial Services</title>
-      <meta content="width=device-width, initial-scale=1.0" name="viewport">
-      <meta property="og:image" content="https://finservkart.com/logo.png">
-      <meta name="subject" content="Finservkart">
-      <meta name="subtitle" content="Welcome to FinservKart, your trusted partner in navigating the intricate landscape of financial services.">
-      <meta name="description" content="At Finservkart, we understand the intricate dynamics of the financial landscape, and we are dedicated to empowering individuals and businesses with tailored financial solutions.">
-      <meta name="keywords" content="">
-      <meta name="catagory" content="Finance Provider">
-      <meta name="identifier-URL" content="https://finservkart.com/">
-      <meta name="coverage" content="Worldwide">
-      <meta name='target' content='all'>
-      <meta name='HandheldFriendly' content='True'>
-      <meta http-equiv='Cache-Control' content='no-cache'>
-      <meta http-equiv='imagetoolbar' content='no'>
-      <meta http-equiv='x-dns-prefetch-control' content='off'>
-      <meta name='og:email' content='info@finservkart.com'>
-      <meta name='og:region' content='IN'>
-      <meta name='og:country-name' content='INDIA'>
-      <!-- Favicon -->
-      <link href="img/favcon.webp" rel="icon">
+    <title>Finservkart | Premium Financial Services</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta property="og:image" content="https://finservkart.com/logo.png">
+    <meta name="subject" content="Finservkart">
+    <meta name="subtitle" content="Welcome to FinservKart, your trusted partner in navigating the intricate landscape of financial services.">
+    <meta name="description" content="At Finservkart, we understand the intricate dynamics of the financial landscape, and we are dedicated to empowering individuals and businesses with tailored financial solutions.">
+    <meta name="keywords" content="">
+    <meta name="catagory" content="Finance Provider">
+    <meta name="identifier-URL" content="https://finservkart.com/">
+    <meta name="coverage" content="Worldwide">
+    <meta name='target' content='all'>
+    <meta name='HandheldFriendly' content='True'>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+    <meta http-equiv='imagetoolbar' content='no'>
+    <meta http-equiv='x-dns-prefetch-control' content='off'>
+    <meta name='og:email' content='info@finservkart.com'>
+    <meta name='og:region' content='IN'>
+    <meta name='og:country-name' content='INDIA'>
+    <!-- Favicon -->
+    <link href="img/favcon.webp" rel="icon">
 
-    <!-- Google Web Fonts -->
+    <!-- Google Web Fonts - Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -42,145 +42,242 @@ include("capture.php");
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Modern Premium Stylesheet -->
+    <link href="css/modern-premium.css" rel="stylesheet">
+    
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <script src="js/country-states.js"></script>
 </head>
 
-<body>
+<body style="font-family: 'Poppins', sans-serif;">
     <!-- Spinner Start -->
-    <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
-    </div> -->
+    </div>
     <!-- Spinner End -->
 
     <?php include("include/header.php"); ?>
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-lg-8">
-                                    <!--<p class="d-inline-block border border-white rounded text-primary fw-semi-bold py-1 px-3 animated slideInDown">Welcome to Tax File</p>-->
-                                    <h1 class="display-1 mb-4 animated slideInDown">Your Financial Status Is Our Goal</h1>
-                                    <a href="#explore" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More</a>
-                                </div>
+    <!-- Modern Hero Section Start -->
+    <section class="hero-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%); min-height: 700px; display: flex; align-items: center; padding: 60px 0; margin-top: -20px;">
+        <!-- Animated Background Elements -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+            <div class="animated-blob" style="position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.2); top: -100px; right: -50px; animation: float 6s ease-in-out infinite;"></div>
+            <div class="animated-blob" style="position: absolute; width: 250px; height: 250px; border-radius: 50%; background: rgba(255,255,255,0.1); bottom: -80px; left: -50px; animation: float 8s ease-in-out infinite 2s;"></div>
+        </div>
+
+        <div class="container position-relative z-1">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div style="animation: slideInLeft 0.8s ease-out;">
+                        <span class="badge mb-3" style="font-size: 14px; padding: 10px 18px; background: rgba(255, 255, 255, 0.2); color: #ffffff; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); font-weight: 600; letter-spacing: 0.5px;">
+                            <i class="fas fa-star me-2"></i>Trusted Financial Partner
+                        </span>
+                        <h1 class="display-3 fw-bold text-white mb-4" style="line-height: 1.2;">
+                            Your Financial Future <span style="background: linear-gradient(120deg, #ffed4e, #ffd700); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Starts Here</span>
+                        </h1>
+                        <p class="fs-5 text-white-50 mb-4" style="max-width: 500px; line-height: 1.8;">
+                            Navigate your financial journey with confidence. We provide comprehensive solutions, expert guidance, and 24/7 support tailored to your unique needs.
+                        </p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="#explore" class="btn btn-light btn-lg fw-semi-bold" style="border-radius: 50px; padding: 12px 40px;">
+                                <i class="fas fa-arrow-right me-2"></i>Explore Solutions
+                            </a>
+                            <a href="contact.php" class="btn btn-outline-light btn-lg fw-semi-bold" style="border-radius: 50px; padding: 12px 40px; border-width: 2px;">
+                                <i class="fas fa-phone me-2"></i>Get in Touch
+                            </a>
+                        </div>
+                        <div class="d-flex gap-5 mt-5 flex-wrap">
+                            <div>
+                                <h3 class="text-white fw-bold">10000+</h3>
+                                <p class="text-white-50 mb-0">Active Clients</p>
+                            </div>
+                            <div>
+                                <h3 class="text-white fw-bold">99%</h3>
+                                <p class="text-white-50 mb-0">Satisfaction Rate</p>
+                            </div>
+                            <div>
+                                <h3 class="text-white fw-bold">24/7</h3>
+                                <p class="text-white-50 mb-0">Customer Support</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-lg-7">
-                                    <!--<p class="d-inline-block border border-white rounded text-primary fw-semi-bold py-1 px-3 animated slideInDown">Welcome to Tax File</p>-->
-                                    <h1 class="display-1 mb-4 animated slideInDown">True Financial Support For You</h1>
-                                    <a href="#explore" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More</a>
+                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInRight;">
+                    <div class="position-relative">
+                        <!-- Floating Card 1 -->
+                        <div class="bg-white rounded-3 p-4 shadow-lg" style="position: absolute; width: 280px; top: 40px; right: 20px; animation: float 3s ease-in-out infinite; border: 1px solid rgba(0,102,204,0.1);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-primary bg-opacity-10 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-chart-line text-primary fs-5"></i>
                                 </div>
+                                <h5 class="ms-3 mb-0">Smart Investments</h5>
                             </div>
+                            <p class="text-muted small mb-2">Grow your wealth with our curated investment solutions.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-primary fw-bold">+28% Returns</span>
+                                <i class="fas fa-arrow-up text-success"></i>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 2 -->
+                        <div class="bg-white rounded-3 p-4 shadow-lg" style="position: absolute; width: 280px; bottom: 60px; left: 20px; animation: float 3s ease-in-out infinite 1s; border: 1px solid rgba(0,102,204,0.1);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-success bg-opacity-10 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-shield-alt text-success fs-5"></i>
+                                </div>
+                                <h5 class="ms-3 mb-0">Secure & Safe</h5>
+                            </div>
+                            <p class="text-muted small mb-2">Bank-level security for your peace of mind.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-success fw-bold">ISO Certified</span>
+                                <i class="fas fa-check text-success"></i>
+                            </div>
+                        </div>
+
+                        <!-- Main Illustration Placeholder -->
+                        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-chart-pie text-white" style="font-size: 120px; opacity: 0.3;"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+        </div>
+    </section>
+    <!-- Modern Hero Section End -->
+
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-section {
+            position: relative;
+        }
+
+        .text-white-50 {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .btn-light:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-light:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+    </style>
             </button>
         </div>
     </div>
     <!-- Carousel End -->
-
-
     <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container" id="explore">
-            <div class="row g-4 align-items-end mb-4">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <img class="img-fluid rounded" src="img/about.jpg">
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">About Us</p>
-                    <h1 class="display-5 mb-4">Empowering Your Financial Journey</h1>
-                    <p class="mb-4">Welcome to FinservKart, your trusted partner in navigating the intricate landscape of financial services. Established with a vision to empower individuals and businesses with smart financial solutions, FinservKart is committed to delivering excellence in every transaction.</p>
-                    <div class="border rounded p-4">
-                        <nav>
-                            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                                <button class="nav-link fw-semi-bold active" id="nav-story-tab" data-bs-toggle="tab" data-bs-target="#nav-story" type="button" role="tab" aria-controls="nav-story" aria-selected="true">Story</button>
-                                <button class="nav-link fw-semi-bold" id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission" type="button" role="tab" aria-controls="nav-mission" aria-selected="false">Mission</button>
-                                <button class="nav-link fw-semi-bold" id="nav-vision-tab" data-bs-toggle="tab" data-bs-target="#nav-vision" type="button" role="tab" aria-controls="nav-vision" aria-selected="false">Vision</button>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-story" role="tabpanel" aria-labelledby="nav-story-tab">
-                                <p>Born from a passion for transforming financial experiences, FinservKart has evolved into a trusted partner, leveraging expertise and technology to make finance seamless and rewarding for everyone.</p>
-                            </div>
-                            <div class="tab-pane fade" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <p>Empower individuals and businesses by simplifying finance and providing accessible, personalized solutions that help them achieve their financial goals.</p>
-                            </div>
-                            <div class="tab-pane fade" id="nav-vision" role="tabpanel" aria-labelledby="nav-vision-tab">
-                                <p>To be a leading force in revolutionizing the financial services landscape through innovation, transparency, and a customer-centric approach.</p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-xxl py-5 features-section" id="explore" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="row mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3" style="color: #1a202c;">Why Choose FinservKart?</h2>
+                    <p class="fs-5" style="color: #475569;">We're committed to delivering comprehensive financial solutions with transparency, expertise, and innovation.</p>
                 </div>
             </div>
-            <div class="border rounded p-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="row g-4">
-                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="h-100">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h4>No Hidden Cost</h4>
-                                    <span>Transparent and straightforward pricing for your peace of mind</span>
-                                </div>
-                                <div class="border-end d-none d-lg-block"></div>
-                            </div>
-                            <div class="border-bottom mt-4 d-block d-lg-none"></div>
+
+            <!-- Features Grid -->
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="feature-item" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(37, 99, 235, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(37, 99, 235, 0.1)';">
+                        <div class="icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, #2563eb, #1e40af); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <i class="fas fa-bolt" style="color: white; font-size: 1.5rem;"></i>
                         </div>
+                        <h4 class="mb-3" style="color: #1a202c; font-weight: 600;">Lightning Fast</h4>
+                        <p style="color: #475569; font-size: 0.95rem;">Quick processing and instant approvals for your financial needs. Get results in minutes, not days.</p>
                     </div>
-                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                        <div class="h-100">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
-                                    <i class="fa fa-users text-white"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h4>Dedicated Team</h4>
-                                    <span>Committed experts working together for your success</span>
-                                </div>
-                                <div class="border-end d-none d-lg-block"></div>
-                            </div>
-                            <div class="border-bottom mt-4 d-block d-lg-none"></div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="feature-item" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(37, 99, 235, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(37, 99, 235, 0.1)';">
+                        <div class="icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <i class="fas fa-shield-alt" style="color: white; font-size: 1.5rem;"></i>
                         </div>
+                        <h4 class="mb-3" style="color: #1a202c; font-weight: 600;">Bank-Level Security</h4>
+                        <p style="color: #475569; font-size: 0.95rem;">Your data is protected with military-grade encryption. ISO certified and fully compliant with regulations.</p>
                     </div>
-                    <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="h-100">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
-                                    <i class="fa fa-phone text-white"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h4>24/7 Available</h4>
-                                    <span>Always here for you, 24/7</span>
-                                </div>
-                            </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="feature-item" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(37, 99, 235, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(37, 99, 235, 0.1)';">
+                        <div class="icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <i class="fas fa-users" style="color: white; font-size: 1.5rem;"></i>
                         </div>
+                        <h4 class="mb-3" style="color: #1a202c; font-weight: 600;">Expert Team</h4>
+                        <p style="color: #475569; font-size: 0.95rem;">Our dedicated financial experts are ready to guide you with personalized solutions tailored to your goals.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="feature-item" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(37, 99, 235, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(37, 99, 235, 0.1)';">
+                        <div class="icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, #ec4899, #be185d); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <i class="fas fa-clock" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a202c; font-weight: 600;">24/7 Support</h4>
+                        <p style="color: #475569; font-size: 0.95rem;">Round-the-clock customer support available on call, email, and chat for your convenience.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="feature-item" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(37, 99, 235, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(37, 99, 235, 0.1)';">
+                        <div class="icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <i class="fas fa-eye" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a202c; font-weight: 600;">Full Transparency</h4>
+                        <p style="color: #475569; font-size: 0.95rem;">No hidden charges, no surprises. Clear pricing and complete visibility into all your transactions.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="feature-item" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(37, 99, 235, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(37, 99, 235, 0.1)';">
+                        <div class="icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <i class="fas fa-chart-line" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a202c; font-weight: 600;">Proven Results</h4>
+                        <p style="color: #475569; font-size: 0.95rem;">Join thousands of satisfied customers who've achieved their financial goals with our expert guidance.</p>
                     </div>
                 </div>
             </div>
@@ -190,84 +287,112 @@ include("capture.php");
 
 
     <!-- Facts Start -->
-    <div class="container-fluid facts my-5 py-5">
-        <div class="container py-5">
+    <section class="stats-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); padding: 60px 0;">
+        <div class="container position-relative z-1">
             <div class="row g-5">
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-users fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">547</h1>
-                    <span class="fs-5 text-white">Happy Clients</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                <!-- Stat 1 -->
+                <div class="col-sm-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="stat-item" style="text-align: center; background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);">
+                        <i class="fas fa-smile fa-3x mb-3" style="color: #fbbf24;"></i>
+                        <h3 class="display-5" style="color: white; font-weight: 700; margin: 15px 0;"><span data-toggle="counter-up">10000</span><span style="font-size: 0.8em;">+</span></h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-weight: 500;">Happy Clients</p>
+                    </div>
                 </div>
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-check fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-                    <span class="fs-5 text-white">Projects Completed</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                <!-- Stat 2 -->
+                <div class="col-sm-6 col-lg-3 wow fadeIn" data-wow-delay="0.2s">
+                    <div class="stat-item" style="text-align: center; background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);">
+                        <i class="fas fa-check-circle fa-3x mb-3" style="color: #10b981;"></i>
+                        <h3 class="display-5" style="color: white; font-weight: 700; margin: 15px 0;"><span data-toggle="counter-up">50000</span><span style="font-size: 0.8em;">+</span></h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-weight: 500;">Services Completed</p>
+                    </div>
                 </div>
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">250</h1>
-                    <span class="fs-5 text-white">Dedicated Staff</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
+                <!-- Stat 3 -->
+                <div class="col-sm-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="stat-item" style="text-align: center; background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);">
+                        <i class="fas fa-users-cog fa-3x mb-3" style="color: #06b6d4;"></i>
+                        <h3 class="display-5" style="color: white; font-weight: 700; margin: 15px 0;"><span data-toggle="counter-up">250</span><span style="font-size: 0.8em;">+</span></h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-weight: 500;">Expert Professionals</p>
+                    </div>
                 </div>
-                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                    <i class="fa fa-award fa-3x text-white mb-3"></i>
-                    <h1 class="display-4 text-white" data-toggle="counter-up">5</h1>
-                    <span class="fs-5 text-white">Awards Achieved</span>
-                    <hr class="bg-white w-25 mx-auto mb-0">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Facts End -->
-
-
-    <!-- Features Start -->
-    <div class="container-xxl feature py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Why Choosing Us!</p>
-                    <h1 class="display-5 mb-4">Few Reasons Why People Choosing Us!</h1>
-                    <p class="mb-4">Choose FinservKart for unparalleled financial solutions – our dedicated team, innovative approach, and 24/7 availability ensure a seamless experience tailored to your unique needs. Trust in expertise, choose FinservKart for your financial journey.</p>
-                    <a class="btn btn-primary py-3 px-5" href="about.php">Explore More</a>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-md-6">
-                            <div class="row g-4">
-                                <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
-                                    <div class="feature-box border rounded p-4">
-                                        <i class="fa fa-check fa-3x text-primary mb-3"></i>
-                                        <h4 class="mb-3">Fast Executions</h4>
-                                        <p class="mb-3">Swift and precise actions for optimal efficiency.</p>
-                                        <!--<a class="fw-semi-bold" href="">Read More <i class="fa fa-arrow-right ms-1"></i></a>-->
-                                    </div>
-                                </div>
-                                <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
-                                    <div class="feature-box border rounded p-4">
-                                        <i class="fa fa-check fa-3x text-primary mb-3"></i>
-                                        <h4 class="mb-3">Guide & Support</h4>
-                                        <p class="mb-3">Providing expert navigation and direction.</p>
-                                        <!--<a class="fw-semi-bold" href="">Read More <i class="fa fa-arrow-right ms-1"></i></a>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.7s">
-                            <div class="feature-box border rounded p-4">
-                                <i class="fa fa-check fa-3x text-primary mb-3"></i>
-                                <h4 class="mb-3">Financial Secure</h4>
-                                <p class="mb-3">Ensuring financial security for a resilient and prosperous future.</p>
-                                <!--<a class="fw-semi-bold" href="">Read More <i class="fa fa-arrow-right ms-1"></i></a>-->
-                            </div>
-                        </div>
+                <!-- Stat 4 -->
+                <div class="col-sm-6 col-lg-3 wow fadeIn" data-wow-delay="0.4s">
+                    <div class="stat-item" style="text-align: center; background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);">
+                        <i class="fas fa-award fa-3x mb-3" style="color: #fbbf24;"></i>
+                        <h3 class="display-5" style="color: white; font-weight: 700; margin: 15px 0;"><span data-toggle="counter-up">15</span><span style="font-size: 0.8em;">+</span></h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-weight: 500;">Industry Awards</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!-- Facts End -->
+
+
+    <!-- Features Start -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="row mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3">Our Core Services</h2>
+                    <p class="fs-5 text-muted">Comprehensive financial solutions designed to meet your unique needs</p>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="row g-4" id="services-grid">
+                <?php
+                    // Database connection
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "WindRed@12345";
+                    $dbname = "finservkart";
+                    
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    
+                    // Fetch services
+                    $sql = "SELECT * FROM services ORDER BY RAND() LIMIT 6";
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        $delay = 0.1;
+                        while($row = $result->fetch_assoc()) {
+                            $service_name = $row["service_name"];
+                            $service_image = $row["service_image"];
+                            $id = $row["id"];
+                            ?>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<?php echo $delay; ?>s">
+                                <div class="service-card">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <h4 class="mb-3"><?php echo $service_name; ?></h4>
+                                    <p class="text-muted">Professional <?php echo strtolower($service_name); ?> services tailored to your needs with expert guidance.</p>
+                                    <a href="service.php">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <?php
+                            $delay += 0.1;
+                        }
+                    }
+                    $conn->close();
+                ?>
+            </div>
+
+            <!-- Explore All Services Button -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="service.php" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-right me-2"></i>Explore All Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Features End -->
 
 
@@ -275,9 +400,9 @@ include("capture.php");
     <?php
          // Database connection details
          $servername = "localhost";
-         $username = "u149690965_tax";
-         $password = "Taxfile@2024";
-         $dbname = "u149690965_tax";
+         $username = "root";
+         $password = "WindRed@12345";
+         $dbname = "finservkart";
          
          // Create connection
          $conn = new mysqli($servername, $username, $password, $dbname);

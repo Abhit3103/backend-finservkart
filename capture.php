@@ -26,13 +26,10 @@ if(strpos($ipaddr,',') !== false)
 $jsonData = file_get_contents('http://ip-api.com/json/' . $ipaddr);
 $locationData = json_decode($jsonData, true);
 
-// Check if 'zip' key exists in the response
-$zip = isset($locationData['zip']) ? $locationData['zip'] : null;
-
 $dbHost = 'localhost';
-$dbName = 'finservcart';
+$dbName = 'finservkart';
 $dbUsername = 'root';
-$dbPassword = '';
+$dbPassword = 'WindRed@12345';
 
 function fetchData($pdo, $ipaddr, $zip) {
     $query = "SELECT * FROM track WHERE ip = :ip OR zip = :zip";
@@ -47,7 +44,7 @@ try {
     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUsername, $dbPassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $data = fetchData($pdo, $ipaddr, $zip);
+    $data = fetchData($pdo, $ipaddr, $locationData['zip']);
 
     $matchFound = !empty($data);
 
@@ -59,7 +56,7 @@ try {
         $stmt->bindParam(':country', $locationData['country']);
         $stmt->bindParam(':region', $locationData['regionName']);
         $stmt->bindParam(':city', $locationData['city']);
-        $stmt->bindParam(':zip', $zip); // Use the $zip variable
+        $stmt->bindParam(':zip', $locationData['zip']);
         $stmt->bindParam(':lat', $locationData['lat']);
         $stmt->bindParam(':lon', $locationData['lon']);
         $stmt->bindParam(':timezone', $locationData['timezone']);

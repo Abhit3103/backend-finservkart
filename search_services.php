@@ -1,9 +1,9 @@
 <?php
 // Database connection details
 $servername = "localhost";
-$username = "u149690965_tax";
+$username = "root";
 $password = "Taxfile@2024";
-$dbname = "u149690965_tax";
+$dbname = "finservkart";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

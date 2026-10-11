@@ -23,16 +23,102 @@
       <meta name='og:country-name' content='INDIA'>
       <!-- Favicon -->
       <link href="img/favcon.webp" rel="icon">
+      <!-- Google Web Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+      <!-- Icon Font Stylesheet -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+      <!-- Bootstrap CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Modern Premium CSS -->
+      <link href="css/modern-premium.css" rel="stylesheet">
+      <!-- Template Stylesheet -->
+      <link href="css/style.css" rel="stylesheet">
 
 <style>
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #1a202c;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #f0f7ff 0%, #f8fafb 100%);
+  min-height: 100vh;
+}
+
+.policy-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fbff 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.policy-container h2 {
+  color: #1e40af;
+  font-weight: 700;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #2563eb;
+  display: inline-block;
+}
+
+.policy-container h3 {
+  color: #2563eb;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.policy-container p {
+  color: #2d3748;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
 .myDiv {
-  border: 5px outset black;
-  background-color: white;    
+  border: none;
+  background-color: transparent;
   text-align: left;
+}
+
+.policy-container a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.policy-container a:hover {
+  color: #1e40af;
+  text-decoration: underline;
 }
 </style>
 </head>
-<body>
+<body style="font-family: 'Poppins', sans-serif;">
+<?php include("include/header.php"); ?>
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+   <div class="container position-relative z-1">
+      <h1 class="display-3 mb-4 animated slideInDown">Privacy Policy</h1>
+      <nav aria-label="breadcrumb animated slideInDown">
+         <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+         </ol>
+      </nav>
+   </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Privacy Policy Content -->
+<div class="container-xxl py-5">
+<div class="policy-container">
 <p text align="center">
 <font face="courier" size="5"><strong>PRIVACY POLICY</strong></font></p>
 
@@ -80,14 +166,20 @@
 <p>We may update this Privacy Policy from time to time. We will notify you of significant changes via email or a notice on our website.</p>
 
 <h3><strong>7. Contact Us:</strong></h3>
-<p>If you have questions or concerns about your privacy or this Privacy Policy, please contact us at <a href="mailto:info@finservkart.com">info@finservkart.com</a><br>
+<p>If you have questions or concerns about your privacy or this Privacy Policy, please contact us at <a href="mailto:info@finservkart.com" style="color: #2563eb; text-decoration: none; font-weight: 600;">info@finservkart.com</a><br>
 
 By using our software and services, you consent to the terms of this Privacy Policy. Please review it carefully and periodically for any updates.
 
 </p>
 
 </div>
+</div>
+</div>
+<!-- Privacy Policy Content End -->
+
+<?php include("include/footer.php"); ?>
 
 </body>
+</html>
 </html>
 

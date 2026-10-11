@@ -65,7 +65,7 @@
                // Database connection details
                $servername = "localhost";
                $username = "root";
-               $password = "";
+               $password = "WindRed@12345";
                $dbname = "finservkart";
                $host = 'localhost';
                

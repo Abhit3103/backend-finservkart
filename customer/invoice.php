@@ -160,9 +160,18 @@
           </span>
           <span class="tm_btn_text">Download</span>
         </button>
+
+
       </div>
     </div>
   </div>
+          
+  <script>
+ 
+  window.onafterprint = function(){
+    window.location.href = "dashboard.php"; 
+  };
+</script>
   <script src="assets/jquery.min.js"></script>
   <script src="assets/jspdf.min.js"></script>
   <script src="assets/html2canvas.min.js"></script>

@@ -2,6 +2,8 @@
 session_start();   
 include("../capture.php");
 include_once('../include/config.php');
+
+$errorMessage = "";
 // Code for login   
 if(isset($_POST['login']))
 {
@@ -85,7 +87,7 @@ if(isset($_POST['login']))
                         </div>
                         <br/>
                         <div class="row form-ro fgbh">
-                           <div class="col-6">
+                             <div class="col-6">
                               <a href="forgot-pass.php">Forget Password</a>
                            </div>
                            <div class="col-6">

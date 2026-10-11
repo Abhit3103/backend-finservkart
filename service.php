@@ -28,59 +28,108 @@
       <!-- Google Web Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
       <!-- Icon Font Stylesheet -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
       <!-- Libraries Stylesheet -->
       <link href="lib/animate/animate.min.css" rel="stylesheet">
       <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
       <!-- Customized Bootstrap Stylesheet -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Modern Premium CSS -->
+      <link href="css/modern-premium.css" rel="stylesheet">
       <!-- Template Stylesheet -->
       <link href="css/style.css" rel="stylesheet">
       <style>
+         body {
+            font-family: 'Poppins', sans-serif;
+            color: #1a202c;
+            background: #f8fafc;
+         }
+         
          .heading {
-         margin-bottom: 1.5rem;
-         font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #2d3748;
+            font-weight: 600;
          }
+         
          .searchInputWrapper {
-         position: relative;
+            position: relative;
+            display: inline-block;
          }
+         
          .searchInput {
-         width: 20rem;
-         height: 2rem;
-         padding: 0 1rem; 
-         border-radius: 2rem;
-         border: none;
-         transition: transform 0.1s ease-in-out;
+            width: 100%;
+            max-width: 350px;
+            height: 50px;
+            padding: 0 20px 0 20px; 
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease-in-out;
+            color: #1a202c;
+            font-size: 0.95rem;
          }
-         ::placeholder {
-         color: #a1a1a1;
+         
+         .searchInput::placeholder {
+            color: #94a3b8;
          }
-         /* hide the placeholder text on focus */
-         :focus::placeholder {
-         text-indent: -999px
-         }
+         
          .searchInput:focus {
-         outline: none;
-         transform: scale(1.1);
-         transition: all 0.1s ease-in-out;
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
          }
+         
          .searchInputIcon {
-         position: absolute;
-         right: 0.8rem;
-         top: 0.5rem;
-         color: #a1a1a1;
-         transition: all 0.1s ease-in-out;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
          }
-         .container:focus-within > 
-         .searchInputWrapper > .searchInputIcon {
-         right: 0.2rem;
+         
+         .searchInput:focus ~ .searchInputIcon {
+            color: #2563eb;
+         }
+         
+         .filter-service {
+            background: white;
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 12px;
+            padding: 20px !important;
+            margin-bottom: 15px !important;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #475569 !important;
+         }
+         
+         .filter-service:hover {
+            border-color: #2563eb !important;
+            background: linear-gradient(135deg, #f0f7ff 0%, #f9fbff 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+         }
+         
+         .filter-service.active {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border-color: #2563eb !important;
+            color: white !important;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+         }
+         
+         .filter-service h5 {
+            font-weight: 600;
+            font-size: 1rem;
          }
       </style>
    </head>
-   <body>
+   <body style="font-family: 'Poppins', sans-serif;">
       <!-- Spinner Start -->
       <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
@@ -88,8 +137,8 @@
       <!-- Spinner End -->
       <?php include("include/header.php"); ?>
       <!-- Page Header Start -->
-      <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
-         <div class="container">
+      <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s" style="position: relative; z-index: 1;">
+         <div class="container position-relative z-1">
             <h1 class="display-3 mb-4 animated slideInDown">Services</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                <ol class="breadcrumb mb-0">
@@ -116,16 +165,15 @@
          }
          ?>
       <!-- Service Start -->
-      <div class="container-xxl service py-5">
+      <div class="container-xxl service py-5" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
          <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width:   600px;">
-               <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Our Services</p>
-               <h1 class="display-5 mb-5">Awesome Financial Services For Business</h1>
-               <h1 class="heading">Search Services</h1>
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+               <p class="d-inline-block border rounded fw-semi-bold py-2 px-4" style="background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%); border: 2px solid #2563eb !important; border-radius: 50px; color: #1e40af !important;">Our Services</p>
+               <h1 class="display-5 mb-5" style="color: #1a202c; font-weight: 700; margin-top: 15px;">Awesome Financial Services For Business</h1>
+               <p class="heading" style="color: #2d3748; font-size: 1.1rem;">Search Services</p>
                <div class="searchInputWrapper">
-                  <input class="searchInput" id="searchService" type="text" placeholder='Focus here to search' style="border-color: #000;">
+                  <input class="searchInput" id="searchService" type="text" placeholder='Search services here...' style="border-color: #e2e8f0;">
                   <i class="searchInputIcon fa fa-search"></i>
-                  </input>
                </div>
                <br/><br/>
             </div>
@@ -166,16 +214,16 @@
                      <div class="tab-pane fade <?php echo $activeTabPane; ?>" id="tab-pane-<?php echo $i; ?>">
                         <div class="row g-4">
                            <div class="col-md-6" style="min-height: 350px;">
-                              <div class="position-relative h-100">
+                              <div class="position-relative h-100" style="border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);">
                                  <img class="position-absolute rounded w-100 h-100" src="./admin/assets/services/<?php echo $service_image; ?>" style="object-fit: cover;" alt="">
                               </div>
                            </div>
-                           <div class="col-md-6">
-                              <h3 class="mb-4">Required Documents</h3>
+                           <div class="col-md-6" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1);">
+                              <h3 class="mb-4" style="color: #1a202c; font-weight: 700;">Required Documents</h3>
                               <?php foreach($required_documents as $document): ?>
-                              <p><i class="fa fa-check text-primary me-3"></i><?php echo $document; ?></p>
+                              <p style="color: #475569; margin-bottom: 12px; font-size: 0.95rem; font-weight: 500;"><i class="fa fa-check" style="color: #10b981; margin-right: 12px;"></i><?php echo $document; ?></p>
                               <?php endforeach; ?>
-                              <a href="user-signup.php" class="btn btn-primary py-3 px-5 mt-3">Apply</a>
+                              <a href="user-signup.php" class="btn" style="background: linear-gradient(135deg, #2563eb, #1e40af); color: white; padding: 12px 32px; margin-top: 20px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; border: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(37, 99, 235, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Apply Now</a>
                            </div>
                         </div>
                      </div>

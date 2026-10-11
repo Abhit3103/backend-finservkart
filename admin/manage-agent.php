@@ -1,9 +1,138 @@
-<?php session_start();
-   include_once('../include/config.php');
-   if (strlen($_SESSION['adminid']==0)) {
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+
+include_once('../include/config.php');
+include_once('../smtp/PHPMailerAutoload.php'); // Include PHPMailer
+
+// Session check
+if (strlen($_SESSION['adminid']) == 0) {
     header('location:logout.php');
-    } else{
-   ?>
+    exit();
+}
+
+// Approve Agent
+if (isset($_POST['approve_agent'])) {
+    $agid = $_POST['agid'];
+
+    // Check if already approved
+    $stmtCheck = $con->prepare("SELECT * FROM agent WHERE AGID = ?");
+    $stmtCheck->bind_param("s", $agid);
+    $stmtCheck->execute();
+    $resultCheck = $stmtCheck->get_result();
+    $agent = $resultCheck->fetch_assoc();
+
+    if (!$agent) {
+        echo "<script>alert('Agent not found!'); window.location.href='" . $_SERVER['PHP_SELF'] . "';</script>";
+        exit();
+    }
+
+    if ($agent['is_approved'] == 1) {
+        echo "<script>alert('Agent is already approved.'); window.location.href='" . $_SERVER['PHP_SELF'] . "';</script>";
+        exit();
+    }
+
+    // Approve agent
+    $stmt = $con->prepare("UPDATE agent SET is_approved = 1 WHERE AGID = ?");
+    $stmt->bind_param("s", $agid);
+
+    if ($stmt->execute()) {
+        // Send HTML email to agent
+        $to = $agent['email'];
+        $subject = "Your Finservkart Agent Registration is Approved!";
+        $msg = <<<HTML
+        <html>
+        <body>
+        <h2>Hello {$agent['fname']},</h2>
+        <p>Your agent registration has been approved by the admin.</p>
+        <p>You can now log in using your email and password.</p>
+        <a href="https://finservkart.com/apps/FinservKart-Agent.apk">Download App</a>
+        <p>Thanks,<br>Team Finservkart</p>
+        </body>
+        </html>
+        HTML;
+
+        smtp_mailer($to, $subject, $msg);
+
+        echo "<script>alert('Agent approved successfully!'); window.location.href='" . $_SERVER['PHP_SELF'] . "?approved=true';</script>";
+        exit();
+    } else {
+        echo "<script>alert('Approval failed: {$con->error}'); window.location.href='" . $_SERVER['PHP_SELF'] . "';</script>";
+        exit();
+    }
+}
+
+// Reject Agent
+if (isset($_POST['reject_agent'])) {
+    $agid = $_POST['agid'];
+
+    // Check if agent exists
+    $stmtCheck = $con->prepare("SELECT * FROM agent WHERE AGID = ?");
+    $stmtCheck->bind_param("s", $agid);
+    $stmtCheck->execute();
+    $resultCheck = $stmtCheck->get_result();
+    $agent = $resultCheck->fetch_assoc();
+
+    if (!$agent) {
+        echo "<script>alert('Agent not found!'); window.location.href='" . $_SERVER['PHP_SELF'] . "';</script>";
+        exit();
+    }
+
+    // Reject agent (even if already approved)
+    $stmt = $con->prepare("UPDATE agent SET is_approved = 2 WHERE AGID = ?");
+    $stmt->bind_param("s", $agid);
+
+    if ($stmt->execute()) {
+        // Send rejection email
+        $to = $agent['email'];
+        $subject = "Your Finservkart Agent Registration was Rejected";
+        $msg = <<<HTML
+        <html>
+        <body>
+        <h2>Hello {$agent['fname']},</h2>
+        <p>We regret to inform you that your agent profile has been rejected by the admin.</p>
+        <p>You may contact our support team if you believe this was an error.</p>
+        <p>Thanks,<br>Team Finservkart</p>
+        </body>
+        </html>
+        HTML;
+
+        smtp_mailer($to, $subject, $msg);
+
+        echo "<script>alert('Agent rejected successfully.'); window.location.href='" . $_SERVER['PHP_SELF'] . "?rejected=true';</script>";
+        exit();
+    } else {
+        echo "<script>alert('Rejection failed: {$con->error}'); window.location.href='" . $_SERVER['PHP_SELF'] . "';</script>";
+        exit();
+    }
+}
+
+
+// SMTP Mailer function
+function smtp_mailer($to, $subject, $msg) {
+    $mail = new PHPMailer(); 
+    $mail->IsSMTP(); 
+    $mail->SMTPAuth = true; 
+    $mail->SMTPSecure = 'tls'; 
+    $mail->Host = "smtp.hostinger.com";
+    $mail->Port = 587; 
+    $mail->IsHTML(true);
+    $mail->CharSet = 'UTF-8';
+    $mail->Username = "info@finservkart.com";
+    $mail->Password = "Finservkart@2024#&";
+    $mail->SetFrom("info@finservkart.com", "Finservkart");
+    $mail->Subject = $subject;
+    $mail->Body = $msg;
+    $mail->AddAddress($to);
+    $mail->SMTPOptions = ['ssl' => ['verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => false]];
+    $mail->Send();
+}
+?>
+
+
+   
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -163,11 +292,35 @@
                                     <td><?php echo $row['email'];?></td>
                                     <td><center><a href="../api.function/<?php echo $row['doc'];?>" download><img src="../icons/download_folder_file.ico" width="30" height="30" /></a></center></td>
                                     <td><b><i style="color: green;" class="bi bi-record2 me-1" data-pid="<?php echo $row['pid'];?>" data-toggle="modal" data-target="#profileModal">view</i></b></td>
-                                    <td>
-                                       <a href="view-profile.php?role=agent&id=<?php echo $row['id'];?>" onClick="return confirmViewDetails(event, '<?php echo $row['id']; ?>');">
-                                       <img src="../icons/business.ico" width="25" height="25" /></a>
-                                       <a href="api/delete.php?type=agent&id=<?php echo $row['id'];?>" onClick="return confirmDeleteDetails(event, '<?php echo $row['id']; ?>');"> <img src="../icons/delete_user.ico" width="25" height="25" /></a>
-                                    </td>
+                       <td>
+   <a href="view-profile.php?role=agent&id=<?php echo $row['id'];?>" onClick="return confirmViewDetails(event, '<?php echo $row['id']; ?>');">
+      <img src="../icons/business.ico" width="25" height="25" />
+   </a>
+   <a href="api/delete.php?type=agent&id=<?php echo $row['id'];?>" onClick="return confirmDeleteDetails(event, '<?php echo $row['id']; ?>');">
+      <img src="../icons/delete_user.ico" width="25" height="25" />
+   </a>
+
+<?php if($row['is_approved'] == 0): ?>
+   <!-- Show Approve & Reject Buttons -->
+   <form method="post" style="display:inline;">
+       <input type="hidden" name="agid" value="<?php echo $row['AGID']; ?>" />
+       <button type="submit" name="approve_agent" onclick="return confirm('Approve this agent?')" class="btn btn-success btn-sm">Approve</button>
+       <button type="submit" name="reject_agent" onclick="return confirm('Reject this agent?')" class="btn btn-danger btn-sm">Reject</button>
+   </form>
+<?php elseif($row['is_approved'] == 1): ?>
+   <!-- Approved Badge + Option to Reject -->
+   <span class="badge bg-success">Approved</span>
+   <form method="post" style="display:inline;">
+       <input type="hidden" name="agid" value="<?php echo $row['AGID']; ?>" />
+       <button type="submit" name="reject_agent" onclick="return confirm('Reject this approved agent?')" class="btn btn-danger btn-sm">Reject</button>
+   </form>
+<?php elseif($row['is_approved'] == 2): ?>
+   <span class="badge bg-danger">Rejected</span>
+<?php endif; ?>
+
+</td>
+
+
                                  </tr>
                                  <?php endwhile; ?>
                               </tbody>
@@ -304,4 +457,3 @@
     </script>
    </body>
 </html>
-<?php } ?>

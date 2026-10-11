@@ -149,6 +149,27 @@
                            </div>
                         </div>
                      </div>
+
+
+                     <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                           <div class="card-body">
+                              <h5 class="card-title">Pending Commission</span></h5>
+                              <?php
+                                 $query2 = mysqli_query($con, "SELECT SUM(services.ca_commission) AS total_commission FROM workflow JOIN services ON workflow.serviceid = services.id WHERE workflow.CAID = '$CAID'");
+                                 $workflow = mysqli_fetch_row($query2)[0];
+                                 ?>
+                                <div class="d-flex align-items-center">
+                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-bar-chart-steps"></i>
+                                 </div>
+                                 <div class="ps-3">
+                                    <h6><?php echo $workflow;?></h6>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                      <!-- End Revenue Card -->
                      <!-- Customers Card -->
                      <!--<div class="col-xxl-4 col-xl-12">-->

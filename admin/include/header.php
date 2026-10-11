@@ -1,246 +1,94 @@
-<?php session_start();
-   include_once('../include/config.php');
-   if (strlen($_SESSION['adminid']==0)) {
-    header('location:logout.php');
-    }
-?>
-<!-- ======= Header ======= -->
-  <?php 
-  $query=mysqli_query($con,"select * from admin");
-  while($result=mysqli_fetch_array($query))
-  {?> 
-  <header id="header" class="header fixed-top d-flex align-items-center">
+<?php include_once('init.php'); ?>
+<!-- Navbar Start -->
+<div class="container-fluid" style="padding: 0;">
+   <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 1) 100%); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0, 102, 204, 0.08);">
+      <div class="container-fluid px-3 px-lg-5">
+         <!-- Brand/Logo -->
+         <a href="index.php" class="navbar-brand me-4" style="font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            <i class="fas fa-chart-line me-2"></i>FinservKart
+         </a>
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="dashboard.php" class="logo d-flex align-items-center">
-        <img src="include/logo.webp" alt="">
-        <span class="d-none d-lg-block">Admin Portal</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+         <!-- Toggler -->
+         <button type="button" class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" style="box-shadow: none;">
+            <span class="navbar-toggler-icon"></span>
+         </button>
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+         <!-- Navbar Items -->
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto">
+               <a href="index.php" class="nav-item nav-link" style="font-weight: 500; color: #1a1a1a; position: relative; margin: 0 12px; transition: all 0.3s ease;">Home</a>
+               <a href="about.php" class="nav-item nav-link" style="font-weight: 500; color: #1a1a1a; position: relative; margin: 0 12px; transition: all 0.3s ease;">About</a>
+               <a href="service.php" class="nav-item nav-link" style="font-weight: 500; color: #1a1a1a; position: relative; margin: 0 12px; transition: all 0.3s ease;">Services</a>
+               
+               <!-- Login Dropdown -->
+               <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" style="font-weight: 500; color: #1a1a1a; position: relative; margin: 0 12px; display: flex; align-items: center; gap: 6px;" data-bs-toggle="dropdown">
+                     <i class="fas fa-sign-in-alt"></i>Login
+                  </a>
+                  <div class="dropdown-menu border-0 shadow-lg" style="border-radius: 12px; margin-top: 12px; background: white; box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15); overflow: hidden; min-width: 200px;">
+                     <a href="ca-login.php" class="dropdown-item" style="padding: 14px 20px; color: #0f172a; font-weight: 500; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f1f5f9;">
+                        <i class="fas fa-briefcase" style="color: #2563eb; font-size: 16px;"></i>
+                        <span>CA Login</span>
+                        <i class="fas fa-arrow-right ms-auto" style="font-size: 12px; opacity: 0; transition: all 0.3s ease;"></i>
+                     </a>
+                     <a href="agent.php" class="dropdown-item" style="padding: 14px 20px; color: #0f172a; font-weight: 500; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f1f5f9;">
+                        <i class="fas fa-user" style="color: #2563eb; font-size: 16px;"></i>
+                        <span>Agent Login</span>
+                        <i class="fas fa-arrow-right ms-auto" style="font-size: 12px; opacity: 0; transition: all 0.3s ease;"></i>
+                     </a>
+                     <a href="customer.php" class="dropdown-item" style="padding: 14px 20px; color: #0f172a; font-weight: 500; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-user-circle" style="color: #2563eb; font-size: 16px;"></i>
+                        <span>Customer Login</span>
+                        <i class="fas fa-arrow-right ms-auto" style="font-size: 12px; opacity: 0; transition: all 0.3s ease;"></i>
+                     </a>
+                  </div>
+               </div>
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+               <style>
+                  .dropdown-item {
+                     transition: all 0.3s ease !important;
+                  }
+                  .dropdown-item:hover {
+                     background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%) !important;
+                     color: #2563eb !important;
+                     padding-left: 22px !important;
+                  }
+                  .dropdown-item:hover i:last-child {
+                     opacity: 1 !important;
+                     transform: translateX(4px);
+                  }
+               </style>
 
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
+               <a href="contact.php" class="nav-item nav-link" style="font-weight: 500; color: #1a1a1a; position: relative; margin: 0 12px; transition: all 0.3s ease;">Contact</a>
+            </div>
 
-        <li class="nav-item dropdown">
+            <!-- Social Icons -->
+            <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0">
+               <a class="btn btn-sm rounded" href="<?= $fb ?>" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.08) 100%); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; border: 1px solid rgba(37, 99, 235, 0.2);">
+                  <small class="fab fa-facebook-f" style="color: #2563eb; font-size: 14px;"></small>
+               </a>
+               <a class="btn btn-sm rounded" href="<?= $insta ?>" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.08) 100%); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; border: 1px solid rgba(37, 99, 235, 0.2);">
+                  <small class="fab fa-instagram" style="color: #2563eb; font-size: 14px;"></small>
+               </a>
+               <a class="btn btn-sm rounded" href="https://wa.me/+91<?= $whatsapp ?>" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.08) 100%); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; border: 1px solid rgba(37, 99, 235, 0.2);">
+                  <small class="fab fa-whatsapp" style="color: #2563eb; font-size: 14px;"></small>
+               </a>
+            </div>
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">0</span>
-          </a><!-- End Notification Icon -->
+            <!-- CTA Button -->
+            <a href="user-signup.php" class="btn btn-primary btn-sm ms-lg-3 mt-3 mt-lg-0" style="border-radius: 8px; padding: 10px 24px; font-weight: 600; font-size: 14px; background: linear-gradient(135deg, #2563eb 0%, #10b981 100%); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); transition: all 0.3s ease;">
+               <i class="fas fa-rocket me-2"></i>Sign Up
+            </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 0 notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="notification-item">-->
-            <!--  <i class="bi bi-exclamation-circle text-warning"></i>-->
-            <!--  <div>-->
-            <!--    <h4>Lorem Ipsum</h4>-->
-            <!--    <p>Quae dolorem earum veritatis oditseno</p>-->
-            <!--    <p>30 min. ago</p>-->
-            <!--  </div>-->
-            <!--</li>-->
-
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="notification-item">-->
-            <!--  <i class="bi bi-x-circle text-danger"></i>-->
-            <!--  <div>-->
-            <!--    <h4>Atque rerum nesciunt</h4>-->
-            <!--    <p>Quae dolorem earum veritatis oditseno</p>-->
-            <!--    <p>1 hr. ago</p>-->
-            <!--  </div>-->
-            <!--</li>-->
-
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="notification-item">-->
-            <!--  <i class="bi bi-check-circle text-success"></i>-->
-            <!--  <div>-->
-            <!--    <h4>Sit rerum fuga</h4>-->
-            <!--    <p>Quae dolorem earum veritatis oditseno</p>-->
-            <!--    <p>2 hrs. ago</p>-->
-            <!--  </div>-->
-            <!--</li>-->
-
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="notification-item">-->
-            <!--  <i class="bi bi-info-circle text-primary"></i>-->
-            <!--  <div>-->
-            <!--    <h4>Dicta reprehenderit</h4>-->
-            <!--    <p>Quae dolorem earum veritatis oditseno</p>-->
-            <!--    <p>4 hrs. ago</p>-->
-            <!--  </div>-->
-            <!--</li>-->
-
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-            <!--<li class="dropdown-footer">-->
-            <!--  <a href="#">Show all notifications</a>-->
-            <!--</li>-->
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">0</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 0 messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="message-item">-->
-            <!--  <a href="#">-->
-            <!--    <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">-->
-            <!--    <div>-->
-            <!--      <h4>Maria Hudson</h4>-->
-            <!--      <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>-->
-            <!--      <p>4 hrs. ago</p>-->
-            <!--    </div>-->
-            <!--  </a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="message-item">-->
-            <!--  <a href="#">-->
-            <!--    <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">-->
-            <!--    <div>-->
-            <!--      <h4>Anna Nelson</h4>-->
-            <!--      <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>-->
-            <!--      <p>6 hrs. ago</p>-->
-            <!--    </div>-->
-            <!--  </a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="message-item">-->
-            <!--  <a href="#">-->
-            <!--    <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">-->
-            <!--    <div>-->
-            <!--      <h4>David Muldon</h4>-->
-            <!--      <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>-->
-            <!--      <p>8 hrs. ago</p>-->
-            <!--    </div>-->
-            <!--  </a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <!--<li class="dropdown-footer">-->
-            <!--  <a href="#">Show all messages</a>-->
-            <!--</li>-->
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <?php $profileImage = empty($result['profile']) ? 'assets/profile/admin.png' : 'assets/profile/' . $result['profile'];?>
-            <img src="<?php echo $profileImage; ?>" alt="Profile" class="rounded-circle" height="30" width="30" style="object-fit: cover;">
-            <span class="d-none d-md-block dropdown-toggle ps-2">
-            <?php
-            $fullName = $result['name'];
-            $nameParts = explode(" ", $fullName);
-            $firstName = $nameParts[0];
-            echo $firstName;
-            ?>
-            </span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Mr. <?= $firstName ?></h6>
-              <span>Admin</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="profile.php">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <!--<li>-->
-            <!--  <a class="dropdown-item d-flex align-items-center" href="users-profile.html">-->
-            <!--    <i class="bi bi-gear"></i>-->
-            <!--    <span>Account Settings</span>-->
-            <!--  </a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--  <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">-->
-            <!--    <i class="bi bi-question-circle"></i>-->
-            <!--    <span>Need Help?</span>-->
-            <!--  </a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--  <hr class="dropdown-divider">-->
-            <!--</li>-->
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="logout.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-  <?php } ?>
+            <style>
+               .btn.rounded:hover {
+                  transform: translateY(-3px);
+                  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.2) !important;
+                  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(16, 185, 129, 0.15) 100%) !important;
+               }
+            </style>
+         </div>
+      </div>
+   </nav>
+</div>
+<!-- Navbar End -->
